@@ -1,0 +1,10 @@
+# editor backups
+*~
+
+# vim swap files
+*.swo
+*.swp
+
+# RVM rc file
+.rvmrc
+

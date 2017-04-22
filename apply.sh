@@ -5,7 +5,9 @@
 # https://github.com/KarolKozlowski
 
 # List of managed config files
-CONFIGS=(.screenrc)
+CONFIGS=()
+CONFIGS+=(.screenrc) # screen
+CONFIGS+=(.gitconfig .gitignore-global) # git
 
 # function for linking config files
 link() {
