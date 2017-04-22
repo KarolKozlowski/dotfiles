@@ -11,10 +11,6 @@ set paste           " paste mode
 set wildmenu        " show tab-completion matches in command line
 set wildmode=longest:full
 
-" air-line setup
-set laststatus=2
-let g:airline_powerline_fonts = 1
-
 " use syntax hiliting
 syntax enable
 
@@ -41,22 +37,29 @@ set tabstop=4 shiftwidth=4 expandtab
 set encoding=utf-8
 set fileencoding=utf-8
 
-" color scheme:
+set laststatus=2
+let g:airline_powerline_fonts = 0
 
-if has("terminfo")
-  set t_Co=256
-  let g:solarized_termcolors=256
-  colorscheme solarized
+" color scheme:
+if &term =~ "xterm"
+    " only on xterm
+    if has("terminfo")
+        set t_Co=256
+        let g:solarized_termcolors=256
+        colorscheme solarized
+        " load airline:
+        let g:airline_powerline_fonts = 1
+    endif
 else
-  "colorscheme ron
-  colorscheme evening
+  "colorscheme evening
+  colorscheme ron
 endif
 
 set background=dark
 
+" remove toolbar in gui
 if has("gui_running")
-  "Remove toolbar
-  set guioptions-=T
+    set guioptions-=T
 endif
 
 " indentation
