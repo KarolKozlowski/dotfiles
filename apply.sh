@@ -30,12 +30,9 @@ link() {
 }
 
 # save scripts directory
-dotdir=$(dirname $0)
-
-# change to HOME
-cd
+dotdir=$(dirname $(realpath $0))
 
 # link files/dirs
 for item in ${CONFIGS[*]}; do
-  link ${dotdir}/${item} ${item}
+  link ${dotdir}/${item} ~/${item}
 done
