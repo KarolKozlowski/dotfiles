@@ -42,18 +42,21 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " color scheme:
-"set t_Co=256
-"let g:solarized_termcolors=256
-"colorscheme solarized
+
+if has("terminfo")
+  set t_Co=256
+  let g:solarized_termcolors=256
+  colorscheme solarized
+else
+  "colorscheme ron
+  colorscheme evening
+endif
 
 set background=dark
 
 if has("gui_running")
-  colorscheme evening
   "Remove toolbar
   set guioptions-=T
-else
-  colorscheme ron
 endif
 
 " indentation
