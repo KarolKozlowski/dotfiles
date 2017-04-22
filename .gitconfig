@@ -1,5 +1,7 @@
 [user]
     name  = Karol Kozlowski
+    # set email per repository using:
+    # git config user.email
 
 [alias]
     ci = commit
