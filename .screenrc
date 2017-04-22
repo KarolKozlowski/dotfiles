@@ -1,0 +1,29 @@
+
+startup_message off # Turn off the splash screen
+defscrollback 30000 # Use a 30000-line scrollback buffer
+
+#hardstatus alwayslastline
+#hardstatus string '%{= mK}%-Lw%{= KW}%50>%n%f* %t%{= mK} %+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}'
+#hardstatus alwayslastline "%{= bw} %{= bc}[%{-}%0c%{= bc}]%{-} [%-Lw%{= bW}%{+b}%50>%n%f* %t%{-b}%{= bw}%+Lw]%<"
+hardstatus alwayslastline '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r} (%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c:%s %{g}]'
+
+# keys
+escape ^Aa
+#escape ^Oo
+#escape `~
+
+bindkey ^[[D    prev
+bindkey ^[[C    next
+bindkey ^[[1;5D prev
+bindkey ^[[1;5C next
+
+# unset env
+unsetenv DISPLAY
+
+# auto detach on hangup
+autodetach on
+altscreen on
+
+activity "activity: window ~%"
+vbell_msg "bell: window ~%"
+
