@@ -32,45 +32,61 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-"Text control:
+" text control:
 set textwidth=80    " text width
 set nowrap          " do not wrap long lines
-set tabstop=2 shiftwidth=2 expandtab
+set tabstop=4 shiftwidth=4 expandtab
+
+" default encodings:
+set encoding=utf-8
+set fileencoding=utf-8
+
+" color scheme:
+"set t_Co=256
+"let g:solarized_termcolors=256
+"colorscheme solarized
 
 set background=dark
 
-set t_Co=256
-let g:solarized_termcolors=256
-colorscheme solarized
-
 if has("gui_running")
+  colorscheme evening
+  "Remove toolbar
   set guioptions-=T
+else
+  colorscheme ron
 endif
 
 " indentation
+syntax on
 autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4
 filetype plugin indent on
 set autoindent
 
-"Highliht tabs and trailing spaces:
+" highliht tabs and trailing spaces:
 autocmd syntax * SpaceHi
 autocmd FileType help NoSpaceHi
 
-"Highlight current row:
+" highlight current row:
 autocmd WinLeave * set nocursorline
 autocmd WinEnter * set cursorline
 set cursorline
 
-"Highlight current column:
+" highlight current column:
 "autocmd WinLeave * set nocursorcolumn
 "autocmd WinEnter * set cursorcolumn
 "set cursorcolumn
 
-"key bindings
-map <silent> <unique> <F2>  :w<CR>
-map <silent> <unique> <F10> :q<CR>
+"Folding
+set foldenable
+set foldmethod=syntax
+set foldnestmax=1
 
-map <silent> <unique> <C-t>t :tabnew<CR>
-map <silent> <unique> <C-t>n :tabn<CR>
-map <silent> <unique> <C-t>p :tabp<CR>
+" Saves view into a file
+autocmd BufWinLeave * silent! mkview
+autocmd BufWinEnter * silent! loadview
+
+autocmd BufNewFile,BufRead *.rb set filetype=ruby
+autocmd BufNewFile,BufRead *.py set filetype=python
+
+
 
