@@ -1,0 +1,94 @@
+#!/bin/bash
+
+rblk="\001\e[0;30m\002" # Black
+rred="\001\e[0;31m\002" # Regular Red
+rgrn="\001\e[0;32m\002" # Regular Green
+rylw="\001\e[0;33m\002" # Regular Yellow
+rblu="\001\e[0;34m\002" # Regular Blue
+rpur="\001\e[0;35m\002" # Regular Purple
+rcyn="\001\e[0;36m\002" # Regular Cyan
+rwht="\001\e[0;37m\002" # Regular White
+gray="\001\e[1;30m\002" # Gray
+lred="\001\e[1;31m\002" # Light Red
+lgrn="\001\e[1;32m\002" # Light Green
+lylw="\001\e[1;33m\002" # Light Yellow
+lblu="\001\e[1;34m\002" # Light Blue
+lpur="\001\e[1;35m\002" # Light Purple
+lcyn="\001\e[1;36m\002" # Light Cyan
+lwht="\001\e[1;37m\002" # Light White
+ rst="\001\e[m\002"     # Text Reset
+
+#lf='\e[0;10m'   # Line Feed
+#lf=' \n'   # Line Feed
+lf=' '
+
+ps_git_status() {
+  info=""
+  branch=`git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/^* \(.*\)$/\1/'`
+
+  if git config --local --get svn-remote.svn.url >/dev/null 2>/dev/null; then
+    # GIT-SVN
+    #info="${info}${rwht}[GIT-SVN] ${rst}"
+    git_color="${lpur}"
+  fi
+
+  if git config --local --get remote.origin.url >/dev/null 2>/dev/null; then
+    # GIT
+    #info="${info}${rwht}[GIT] ${rst}"
+    git_color="${lylw}"
+  fi
+
+  if [ -n "$branch" ]; then
+    info="${info}[${git_color}${branch}${rst}] ${rst}"
+  fi
+
+  echo -ne $info
+}
+
+ps_cmd_status() {
+  ret=$?
+  if [ $ret -ne 0 ]; then
+    info="${lred}(${ret})${rst}"
+  fi
+
+  echo -ne "${info}"
+}
+
+# run powerline only on non-ssh shells
+if [ "$SSH_CONNECTION" == "" ]; then
+  # powerline
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  . /usr/share/powerline/bindings/bash/powerline.sh
+fi
+
+# enable 256 colors in terminal
+export TERM=xterm-256color
+
+# Add ~/bin to PATH for scripting
+PATH=$HOME/bin:$PATH
+# Add current dir to PATH
+PATH=.:$PATH
+
+# WorkArea
+export WA=$HOME/wa
+
+# setup CDPATH
+CDPATH=.
+# add ~ to CDPATH
+CDPATH=$CDPATH:~
+# add work area to CDPATH
+CDPATH=$CDPATH:$WA
+export CDPATH
+
+export EDITOR=/usr/bin/vim
+
+# setup ussers hosts file for tab-completion
+[ -e ~/.ssh/hosts ] && export HOSTFILE=~/.ssh/hosts
+
+# less config
+export LESS="--quit-if-one-screen --quit-at-eof --RAW-CONTROL-CHARS --no-init"
+
+# import local .bashrc
+[ -e ~/.bashrc-local ] && source ~/.bashrc-local
