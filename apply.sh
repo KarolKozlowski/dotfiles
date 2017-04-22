@@ -7,6 +7,7 @@
 # List of managed config files
 CONFIGS=()
 CONFIGS+=(.screenrc) # screen
+CONFIGS+=(.vimrc .vim) # vim
 CONFIGS+=(.gitconfig .gitignore-global) # git
 
 # function for linking config files
