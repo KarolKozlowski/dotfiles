@@ -1,4 +1,28 @@
 [user]
     name  = Karol Kozlowski
+
+[alias]
+    ci = commit
+    st = status
+    b  = branch -a
+    co = checkout
+    svn-diff = !/home/kakozlow/bin/git2svn
+
+[core]
+    excludesfile = /home/kakozlow/.gitignore
+    #less --quit-if-one-screen --quit-at-eof --chop-long-lines --RAW-CONTROL-CHARS --no-init
+    pager = "less -F -E -S -R -X"
+
+[tig]
+    horizontal-scroll = 33%    # Scroll 33% of the view width
+    split-view-height = 80%    # Split to 80% of the screen
+
+[svn]
+    # do not display changes
+    quiet = true
+    # treat empty dirs as git
+    rmdir = true
+    automkdirs = false
+
 [push]
     default = simple
