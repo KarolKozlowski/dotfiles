@@ -1,5 +1,8 @@
 #!/bin/bash
+# .bashrc
+# Karol Kozlowski
 
+# colors
 rblk="\001\e[0;30m\002" # Black
 rred="\001\e[0;31m\002" # Regular Red
 rgrn="\001\e[0;32m\002" # Regular Green
@@ -16,13 +19,121 @@ lblu="\001\e[1;34m\002" # Light Blue
 lpur="\001\e[1;35m\002" # Light Purple
 lcyn="\001\e[1;36m\002" # Light Cyan
 lwht="\001\e[1;37m\002" # Light White
- rst="\001\e[m\002"     # Text Reset
+rst="\001\e[m\002"     # Text Reset
 
 #lf='\e[0;10m'   # Line Feed
 #lf=' \n'   # Line Feed
 lf=' '
 
-ps_git_status() {
+
+# Public proxy
+[ -r ~/.bashrc-secrets ] && source ~/.bashrc-secrets
+
+# OS dependant variables
+host_color=${rred}
+user_color=${lblu}
+
+major_release() {
+    if [ -f /etc/redhat-release ]; then
+        sed 's/.*\([0-9]\)\.[0-9].*/\1/' /etc/redhat-release
+    else
+        echo -n 0
+    fi
+}
+
+case `uname` in
+    'Linux')
+        LS_OPTIONS="--color"
+        host_color=${rgrn}
+        [ $EUID -eq 0 ] && user_color=${rred}
+        # only on Linux
+        alias pys="echo 'http://'`hostname -f`':8000'; python -m SimpleHTTPServer 8000"
+        case $(major_release) in
+            '6')
+                # Enable git from RHSCL if available
+                [ -d /opt/rh/rh-git29 ] && source scl_source enable rh-git29
+                ;;
+            '7')
+                ;;
+        esac
+
+        ;;
+    'SunOS')
+        LS_OPTIONS=""
+        host_color=${lylw}
+        export TERM=xterm
+        [ $EUID -eq 0 ] && user_color=${rred}
+        bind -f ~/.inputrc-sol
+        ;;
+    *)
+        echo 'What am I?'
+        ;;
+esac
+
+PROMPT_COMMAND='echo -ne "\033]0;$HOSTNAME:$0\007"'
+
+export LS_OPTIONS
+
+# set username color in prompt (red if root)
+
+case `hostname | cut -d"." -f1` in
+  'localshot')
+    host_alias="\h(local)"
+  ;;
+  *)
+    host_alias="\h"
+  ;;
+esac
+
+# Enable bash completion RHEL 6
+[ -e /etc/bash_completion ] && . /etc/bash_completion
+# Enable bash completion RHEL 7
+[ -e /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+# setup ussers hosts file for tab-completion
+[ -e ~/.ssh/hosts ] && export HOSTFILE=~/.ssh/hosts
+
+# set proper timezone
+export TZ='Europe/Warsaw'
+
+# Aliases for commonly used cmds
+alias ls="ls $LS_OPTIONS"
+alias ll="ls $LS_OPTIONS -l"
+alias l="ls $LS_OPTIONS -lA"
+alias pr='http_proxy=$proxy https_proxy=$proxy'
+#alias pip="https_proxy=$proxy; pip --proxy=$http_proxy"
+
+# CDPATH
+CDPATH=.
+CDPATH=$CDPATH:$HOME
+CDPATH=$CDPATH:$HOME/wa
+[ -d /var/lib/jenkins ] && CDPATH=$CDPATH:/var/lib/jenkins
+
+export CDPATH
+
+# less config
+export LESS="--quit-if-one-screen --quit-at-eof --RAW-CONTROL-CHARS --no-init"
+
+# the one and only
+export EDITOR=/usr/bin/vim
+
+# ~/bin
+PATH=$HOME/bin:$PATH
+# local python
+PATH=$HOME/.local/bin:$PATH
+# local ruby
+PATH=$HOME/.gem/ruby/1.8/bin:$PATH
+# Add current dir to PATH
+PATH=.:$PATH
+
+exitstatus() {
+    if [ $? == 0 ]; then
+        echo -ne ""
+    else
+        echo -ne "${rred}"
+    fi
+}
+
+scm() {
   info=""
   branch=`git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/^* \(.*\)$/\1/'`
 
@@ -39,19 +150,12 @@ ps_git_status() {
   fi
 
   if [ -n "$branch" ]; then
-    info="${info}[${git_color}${branch}${rst}] ${rst}"
+    info=" ${info}[${git_color}${branch}${rst}]${rst}"
+  else
+    info=" "
   fi
 
-  echo -ne $info
-}
-
-ps_cmd_status() {
-  ret=$?
-  if [ $ret -ne 0 ]; then
-    info="${lred}(${ret})${rst}"
-  fi
-
-  echo -ne "${info}"
+  echo -ne "$info"
 }
 
 # run powerline only on non-ssh shells
@@ -66,29 +170,7 @@ fi
 # enable 256 colors in terminal
 export TERM=xterm-256color
 
-# Add ~/bin to PATH for scripting
-PATH=$HOME/bin:$PATH
-# Add current dir to PATH
-PATH=.:$PATH
 
-# WorkArea
-export WA=$HOME/wa
+PS1="${user_color}\\u${rst}@${host_color}${host_alias}${rst} \$(exitstatus)\w${rst}\$(scm)\\$ "
+PS2="${lylw}> ${rst}"
 
-# setup CDPATH
-CDPATH=.
-# add ~ to CDPATH
-CDPATH=$CDPATH:~
-# add work area to CDPATH
-CDPATH=$CDPATH:$WA
-export CDPATH
-
-export EDITOR=/usr/bin/vim
-
-# setup ussers hosts file for tab-completion
-[ -e ~/.ssh/hosts ] && export HOSTFILE=~/.ssh/hosts
-
-# less config
-export LESS="--quit-if-one-screen --quit-at-eof --RAW-CONTROL-CHARS --no-init"
-
-# import local .bashrc
-[ -e ~/.bashrc-local ] && source ~/.bashrc-local
