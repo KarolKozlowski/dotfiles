@@ -1,0 +1,13 @@
+# Ask before displaying >50 items
+# Since $WINDIR $PATH var can be in $PATH, this could list
+# all window exectables in C:\WINDOWS
+set completion-query-items 50
+
+# Ignore case for the command-line-completion functionality
+# on:  default to a Windows style console
+# off: default to a *nix style console
+set completion-ignore-case on
+
+# none, visible or audible
+set bell-style audible
+
