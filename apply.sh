@@ -6,6 +6,7 @@
 
 # List of managed config files
 CONFIGS=()
+CONFIGS+=(.inputrc .inputrc-sol) # inputrc
 CONFIGS+=(.screenrc) # screen
 CONFIGS+=(.vimrc .vim) # vim
 CONFIGS+=(.bashrc-global) # bash
