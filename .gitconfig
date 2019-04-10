@@ -1,15 +1,24 @@
 [user]
     name  = Karol Kozlowski
+    email = karol.z.kozlowski@gmail.com
     # set email per repository using:
     # git config user.email
 
 [alias]
-    ci = commit
-    st = status
-    b  = branch -a
-    co = checkout
+    st    = status
+    ci    = commit
+    co    = checkout
+    b     = branch
+    br    = branch -a
+    p     = pull -r -p
+    l     = log --oneline
+    glog  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+
+[color]
+    ui = auto
 
 [core]
+    editor = vim
     excludesfile = ~/.gitignore-global
     #less --quit-if-one-screen --quit-at-eof --chop-long-lines --RAW-CONTROL-CHARS --no-init
     pager = "less -F -E -S -R -X"
@@ -18,12 +27,18 @@
     horizontal-scroll = 33%    # Scroll 33% of the view width
     split-view-height = 80%    # Split to 80% of the screen
 
-[svn]
-    # do not display changes
-    quiet = true
-    # treat empty dirs as git
-    rmdir = true
-    automkdirs = false
+[mergetool]
+    prompt = false
+
+[merge]
+    tool = vimdiff
+    conflictstyle = diff3
+
+[status]
+    showUntrackedFiles = all
 
 [push]
     default = simple
+[diff]
+    ignore-all-space = true
+
