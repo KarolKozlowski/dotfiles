@@ -1,28 +1,27 @@
+autodetach on
 
 startup_message off # Turn off the splash screen
-defscrollback 30000 # Use a 30000-line scrollback buffer
+defscrollback 3000  # Use a 3000-line scrollback buffer
 
-#hardstatus alwayslastline
-#hardstatus string '%{= mK}%-Lw%{= KW}%50>%n%f* %t%{= mK} %+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}'
+termcapinfo xterm* 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
+
+hardstatus alwayslastline
 #hardstatus alwayslastline "%{= bw} %{= bc}[%{-}%0c%{= bc}]%{-} [%-Lw%{= bW}%{+b}%50>%n%f* %t%{-b}%{= bw}%+Lw]%<"
+#hardstatus string '%{= mK}%-Lw%{= KW}%50>%n%f* %t%{= mK} %+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}'
 hardstatus alwayslastline '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r} (%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c:%s %{g}]'
+hardstatus string '%{= kg}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%? %?%= %{g}][%{Y}%l%{g}]%{=b C}[ %d %M %c ]%{W}'
 
 # keys
 escape ^Aa
 #escape ^Oo
 #escape `~
 
-bindkey ^[[D    prev
-bindkey ^[[C    next
-bindkey ^[[1;5D prev
-bindkey ^[[1;5C next
-
 # unset env
 unsetenv DISPLAY
 
 # auto detach on hangup
-autodetach on
 altscreen on
+shelltitle '$ |bash'
 
 activity "activity: window ~%"
 vbell_msg "bell: window ~%"
