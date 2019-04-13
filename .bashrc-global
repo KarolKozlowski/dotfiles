@@ -70,19 +70,19 @@ case `uname` in
         ;;
 esac
 
-PROMPT_COMMAND='echo -ne "\033]0;$HOSTNAME:$0\007"'
+#PROMPT_COMMAND='echo -ne "\033]0;$HOSTNAME:$0\007"'
 
 export LS_OPTIONS
 
 # set username color in prompt (red if root)
 
-case `hostname | cut -d"." -f1` in
-  'localshot')
-    host_alias="\h(local)"
-  ;;
-  *)
-    host_alias="\h"
-  ;;
+case $(hostname | cut -d"." -f1) in
+    'localhost')
+        host_alias="\h(local)"
+    ;;
+    *)
+        host_alias="\h"
+    ;;
 esac
 
 # Enable bash completion RHEL 6
@@ -134,42 +134,43 @@ exitstatus() {
 }
 
 scm() {
-  info=""
-  branch=`git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/^* \(.*\)$/\1/'`
+    info=""
+    branch=`git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/^* \(.*\)$/\1/'`
 
-  if git config --local --get svn-remote.svn.url >/dev/null 2>/dev/null; then
-    # GIT-SVN
-    #info="${info}${rwht}[GIT-SVN] ${rst}"
-    git_color="${lpur}"
-  fi
+    if git config --local --get svn-remote.svn.url >/dev/null 2>/dev/null; then
+        # GIT-SVN
+        #info="${info}${rwht}[GIT-SVN] ${rst}"
+        git_color="${lpur}"
+    fi
 
-  if git config --local --get remote.origin.url >/dev/null 2>/dev/null; then
-    # GIT
-    #info="${info}${rwht}[GIT] ${rst}"
-    git_color="${lylw}"
-  fi
+    if git config --local --get remote.origin.url >/dev/null 2>/dev/null; then
+        # GIT
+        #info="${info}${rwht}[GIT] ${rst}"
+        git_color="${lylw}"
+    fi
 
-  if [ -n "$branch" ]; then
-    info=" ${info}[${git_color}${branch}${rst}]${rst}"
-  else
-    info=" "
-  fi
+    if [ -n "$branch" ]; then
+        info=" ${info}[${git_color}${branch}${rst}]${rst}"
+    else
+        info=" "
+    fi
 
-  echo -ne "$info"
+    echo -ne "$info"
 }
 
 # run powerline only on non-ssh shells
 if [ "$SSH_CONNECTION" == "" ]; then
-  # powerline
-  powerline-daemon -q
-  POWERLINE_BASH_CONTINUATION=1
-  POWERLINE_BASH_SELECT=1
-  . /usr/share/powerline/bindings/bash/powerline.sh
+    if [ -e /usr/share/powerline/bindings/bash/powerline.sh ]; then
+        # powerline
+        powerline-daemon -q
+        POWERLINE_BASH_CONTINUATION=1
+        POWERLINE_BASH_SELECT=1
+        . /usr/share/powerline/bindings/bash/powerline.sh
+    fi
 fi
 
 # enable 256 colors in terminal
-export TERM=xterm-256color
-
+#export TERM=xterm-256color
 
 PS1="${user_color}\\u${rst}@${host_color}${host_alias}${rst} \$(exitstatus)\w${rst}\$(scm)\\$ "
 PS2="${lylw}> ${rst}"
