@@ -37,6 +37,11 @@ link() {
 # save scripts directory
 dotdir=$(dirname $(realpath $0))
 
+# updatesubmodules
+echo "Updating submodules in ${dotdir}"
+git -C "${dotdir}" submodule init
+git -C "${dotdir}" submodule update --remote --merge
+
 # link files/dirs
 for item in ${CONFIGS[*]}; do
   link ${dotdir}/${item} ~/${item}
