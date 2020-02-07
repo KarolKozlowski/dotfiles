@@ -29,6 +29,9 @@ lf=' '
 # Public proxy
 [ -r ~/.bashrc-secrets ] && source ~/.bashrc-secrets
 
+# local overrides
+[ -r ~/.bashrc-local ] && source ~/.bashrc-local
+
 # OS dependant variables
 host_color=${rred}
 user_color=${lblu}
