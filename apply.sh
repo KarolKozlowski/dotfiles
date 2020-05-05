@@ -46,3 +46,11 @@ git -C "${dotdir}" submodule update --remote --merge
 for item in ${CONFIGS[*]}; do
   link ${dotdir}/${item} ~/${item}
 done
+
+bashrc=~/.bashrc
+if grep -q '.bashrc-global' ${bashrc}; then
+    echo "INFO: ~/.bashrc-global already sourced in ${bashrc}"
+else
+    echo "Adding bashrc-global to ${bashrc}"
+    echo -e "\nif [ -f ~/.bashrc-global ]; then\n    source ~/.bashrc-global\nfi" >> ${bashrc}
+fi
