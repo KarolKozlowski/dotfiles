@@ -35,7 +35,7 @@ link() {
 }
 
 # save scripts directory
-dotdir=$(dirname $(realpath $0))
+dotdir=$(dirname $(readlink -f $0))
 
 # updatesubmodules
 echo "Updating submodules in ${dotdir}"
