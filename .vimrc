@@ -7,7 +7,7 @@ set showcmd         " display incomplete commands
 set incsearch       " do incremental searching by deafult
 set number          " show line numbers
 set hlsearch        " highlight search
-set paste           " paste mode
+set pastetoggle=<F2> " toggle paste mode
 set wildmenu        " show tab-completion matches in command line
 set modeline        " enable modeline
 set wildmode=longest:full
@@ -49,6 +49,7 @@ if has("gui_running")
         colorscheme solarized
         " load airline:
         let g:airline_powerline_fonts = 1
+
     endif
 else
   "colorscheme evening
@@ -63,6 +64,7 @@ endif
 "Syntax highlighting and indentation
 syntax on
 filetype plugin indent on
+set smartindent
 set autoindent
 
 "Highliht tabs and trailing spaces:
