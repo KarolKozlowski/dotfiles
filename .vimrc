@@ -21,7 +21,7 @@ syntax enable
 "Text control:
 set textwidth=80    " text width
 set nowrap          " do not wrap long lines
-set tabstop=8
+set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
