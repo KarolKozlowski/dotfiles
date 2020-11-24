@@ -42,3 +42,7 @@
 [diff]
     ignore-all-space = true
 
+[pack]
+    windowMemory = 100m
+    SizeLimit = 100m
+    threads = 1
