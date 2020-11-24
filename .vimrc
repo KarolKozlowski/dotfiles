@@ -26,6 +26,9 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
+" visual bell
+set visualbell
+
 "Default encodings:
 set encoding=utf-8
 set fileencoding=utf-8
