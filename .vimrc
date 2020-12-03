@@ -125,6 +125,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_always_populate_loc_list = enable_syntastic
 let g:syntastic_auto_loc_list = enable_syntastic
 let g:syntastic_check_on_open = enable_syntastic
-let g:syntastic_check_on_wq = 0
 
 let g:syntastic_puppet_puppetlint_args = '--no_class_inherits_from_params_class-check --no-80chars-check'
+let g:syntastic_python_flake8_post_args = '--ignore=E501'
+
