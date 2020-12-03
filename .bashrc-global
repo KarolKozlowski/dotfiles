@@ -139,7 +139,6 @@ exitstatus() {
 
 scm() {
     info=""
-    branch=`git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/^* \(.*\)$/\1/'`
 
     if [ -d $(git rev-parse --git-dir 2>/dev/null) ]; then
         if git config --local --get remote.origin.url >/dev/null 2>/dev/null; then
