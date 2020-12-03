@@ -141,16 +141,16 @@ scm() {
     info=""
     branch=`git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/^* \(.*\)$/\1/'`
 
-    if git config --local --get svn-remote.svn.url >/dev/null 2>/dev/null; then
-        # GIT-SVN
-        #info="${info}${rwht}[GIT-SVN] ${rst}"
-        git_color="${lpur}"
-    fi
-
-    if git config --local --get remote.origin.url >/dev/null 2>/dev/null; then
-        # GIT
-        #info="${info}${rwht}[GIT] ${rst}"
-        git_color="${lylw}"
+    if [ -d $(git rev-parse --git-dir 2>/dev/null) ]; then
+        if git config --local --get remote.origin.url >/dev/null 2>/dev/null; then
+            # GIT
+            git_color="${lcyn}"
+            branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+        elif git config --local --get svn-remote.svn.url >/dev/null 2>/dev/null; then
+            # GIT-SVN
+            git_color="${lpur}"
+            branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+        fi
     fi
 
     if [ -n "$branch" ]; then
