@@ -109,6 +109,7 @@ CDPATH=.
 CDPATH=$CDPATH:$HOME
 CDPATH=$CDPATH:$HOME/wa
 [ -d /var/lib/jenkins ] && CDPATH=$CDPATH:/var/lib/jenkins
+[ -d /mnt/c/Users/karol ] && CDPATH=${CDPATH}:/mnt/c/Users/karol
 
 export CDPATH
 
