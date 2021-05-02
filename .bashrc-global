@@ -125,6 +125,8 @@ PATH=$HOME/bin:$PATH
 PATH=$HOME/.local/bin:$PATH
 # local ruby
 PATH=$HOME/.gem/ruby/1.8/bin:$PATH
+# npm
+PATH=$HOME/.npm-global/bin:$PATH
 # Add current dir to PATH
 PATH=.:$PATH
 
