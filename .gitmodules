@@ -19,3 +19,6 @@
 [submodule ".vim/bundle/spacehi.vim"]
 	path = .vim/bundle/spacehi.vim
 	url = git://github.com/jpalardy/spacehi.vim.git
+[submodule ".vim/bundle/dracula"]
+	path = .vim/bundle/dracula
+	url = https://github.com/dracula/vim.git

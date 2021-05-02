@@ -128,6 +128,11 @@ PATH=$HOME/.gem/ruby/1.8/bin:$PATH
 # Add current dir to PATH
 PATH=.:$PATH
 
+md() {
+    mkdir ${1}
+    cd ${1}
+}
+
 exitstatus() {
     if [ $? == 0 ]; then
         echo -ne ""
