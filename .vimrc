@@ -12,6 +12,9 @@ set wildmenu        " show tab-completion matches in command line
 set modeline        " enable modeline
 set wildmode=longest:full
 
+" pathogen
+execute pathogen#infect()
+
 "Remove dollar sign from EOL
 set lcs=eol:\ 
 
@@ -53,7 +56,8 @@ if has("gui_running")
     endif
 else
   "colorscheme evening
-  colorscheme ron
+  "colorscheme ron
+  colorscheme dracula
 endif
 
 " extend path on WIN
@@ -102,9 +106,6 @@ autocmd BufNewFile,BufRead *.rb set filetype=ruby
 autocmd BufNewFile,BufRead *.py set filetype=python
 
 set nocp
-
-" pathogen
-execute pathogen#infect()
 
 " syntastic
 set statusline+=%#warningmsg#
