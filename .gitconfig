@@ -13,6 +13,8 @@
     p     = pull -r -p
     l     = log --oneline
     glog  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+    signing-on = !git config user.signingkey B54354144585F02B && git config commit.gpgsign true
+    signing-off = !git config --unset user.signingkey && git config commit.gpgsign false
 
 [color]
     ui = auto
