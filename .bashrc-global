@@ -116,6 +116,9 @@ export CDPATH
 # less config
 export LESS="--quit-if-one-screen --quit-at-eof --RAW-CONTROL-CHARS --no-init"
 
+# tell gpg where to ask for pass
+export GPG_TTY=$(tty)
+
 # the one and only
 export EDITOR=/usr/bin/vim
 
