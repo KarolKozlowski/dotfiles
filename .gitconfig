@@ -48,3 +48,5 @@
     windowMemory = 100m
     SizeLimit = 100m
     threads = 1
+[gpg]
+	program = gpg2
