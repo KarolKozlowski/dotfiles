@@ -3,22 +3,22 @@
 	url = https://github.com/tpope/vim-pathogen.git
 [submodule ".vim/bundle/vim-colors-solarized"]
 	path = .vim/bundle/vim-colors-solarized
-	url = git://github.com/altercation/vim-colors-solarized.git
+	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule ".vim/bundle/vim-fugitive"]
-	path = .vim/bundle/vim-fugitive
-	url = git://github.com/tpope/vim-fugitive.git
+    path = .vim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
 [submodule ".vim/bundle/vim-puppet"]
 	path = .vim/bundle/vim-puppet
-	url = git://github.com/rodjek/vim-puppet.git
+	url = https://github.com/rodjek/vim-puppet.git
 [submodule ".vim/bundle/vim-airline"]
 	path = .vim/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline
 [submodule ".vim/bundle/spacehi.vim"]
 	path = .vim/bundle/spacehi.vim
-	url = git://github.com/jpalardy/spacehi.vim.git
+	url = https://github.com/vim-scripts/spacehi.vim.git
 [submodule ".vim/bundle/dracula"]
 	path = .vim/bundle/dracula
 	url = https://github.com/dracula/vim.git
