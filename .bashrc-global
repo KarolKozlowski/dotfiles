@@ -92,6 +92,9 @@ esac
 [ -e /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 # setup ussers hosts file for tab-completion
 [ -e ~/.ssh/hosts ] && export HOSTFILE=~/.ssh/hosts
+# https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
+[ -e $HOME/.asdf/asdf.sh ] && . $HOME/.asdf/asdf.sh
+[ -e $HOME/.asdf/completions/asdf.bash ] && . $HOME/.asdf/completions/asdf.bash
 
 # set proper timezone
 export TZ='Europe/Warsaw'
