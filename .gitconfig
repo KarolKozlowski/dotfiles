@@ -50,3 +50,5 @@
     threads = 1
 [gpg]
 	program = gpg2
+[init]
+	defaultBranch = main
