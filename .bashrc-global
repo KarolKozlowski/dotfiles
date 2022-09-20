@@ -107,6 +107,13 @@ alias pr='http_proxy=$proxy https_proxy=$proxy'
 alias rmb='find -name "*~" -print -delete'
 #alias pip="https_proxy=$proxy; pip --proxy=$http_proxy"
 
+# preserve working dir across ssh sessions
+alias ssh='env SSH_PWD="$PWD" /bin/ssh'
+if [ -n "$SSH_PWD" ]; then
+   cd "$SSH_PWD"
+   unset SSH_PWD
+fi
+
 # CDPATH
 CDPATH=.
 CDPATH=$CDPATH:$HOME
