@@ -107,6 +107,9 @@ alias pr='http_proxy=$proxy https_proxy=$proxy'
 alias rmb='find -name "*~" -print -delete'
 #alias pip="https_proxy=$proxy; pip --proxy=$http_proxy"
 
+# alias for getting ssh keys from GitHub
+alias ssh-key-github='curl https://github.com/KarolKozlowski.keys'
+
 # preserve working dir across ssh sessions
 alias ssh='env SSH_PWD="$PWD" /bin/ssh'
 if [ -n "$SSH_PWD" ]; then
