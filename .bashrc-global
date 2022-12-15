@@ -135,13 +135,17 @@ export EDITOR=/usr/bin/vim
 # ~/bin
 PATH=$HOME/bin:$PATH
 # local python
-PATH=$HOME/.local/bin:$PATH
+# PATH=$HOME/.local/bin:$PATH
 # npm
 PATH=$HOME/.npm-global/bin:$PATH
 # go path
 PATH=$HOME/go/bin:$PATH
 # Add current dir to PATH
 PATH=.:$PATH
+
+if which direnv > /dev/null 2>&1; then
+  eval "$(direnv hook bash)"
+fi
 
 md() {
     mkdir ${1}
