@@ -114,3 +114,5 @@ source ~/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 alias ldapsearch="ldapsearch -x"
+
+alias se="subl.exe"
