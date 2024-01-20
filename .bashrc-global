@@ -204,3 +204,9 @@ fi
 PS1="${user_color}\\u${rst}@${host_color}${host_alias}${rst} \$(exitstatus)\w${rst}\$(scm)\\$ "
 PS2="${lylw}> ${rst}"
 
+# to enable zsh:
+# echo 'export ENABLE_ZSH=true' >> ~/.bashrc-local
+if ! [ -z ${ENABLE_ZSH+x} ] && test -t 1 && command -v zsh > /dev/null; then
+    exec zsh
+fi
+
