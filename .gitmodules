@@ -22,3 +22,6 @@
 [submodule ".vim/bundle/dracula"]
 	path = .vim/bundle/dracula
 	url = https://github.com/dracula/vim.git
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git

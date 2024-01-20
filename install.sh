@@ -10,6 +10,7 @@ CONFIGS+=(.inputrc .inputrc-sol) # inputrc
 CONFIGS+=(.screenrc) # screen
 CONFIGS+=(.vimrc .vim) # vim
 CONFIGS+=(.bashrc-global) # bash
+CONFIGS+=(.oh-my-zsh .zshrc) # zxh
 CONFIGS+=(.gitconfig .gitignore-global) # git
 
 # function for linking config files
