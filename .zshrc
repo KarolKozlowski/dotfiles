@@ -115,4 +115,5 @@ source ~/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 
 alias ldapsearch="ldapsearch -x"
 
-alias se="subl.exe"
+# tell gpg where to ask for pass
+export GPG_TTY=$(tty)
