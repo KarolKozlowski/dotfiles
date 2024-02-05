@@ -14,6 +14,11 @@ CONFIGS+=(.oh-my-zsh .zshrc .zsh .p10k.zsh) # zsh
 CONFIGS+=(.gnupg/gpg-agent.conf .gnupg/gpg.conf) # gpg
 CONFIGS+=(.gitconfig .gitignore-global) # git
 
+# List of config dirs that might be missing on target
+# TODO: inherit this from config links
+DIRS=()
+DIRS+=(.gnupg)
+
 # function for linking config files
 link() {
   # takes 2 paremeters:
@@ -47,6 +52,11 @@ git -C "${dotdir}" submodule update --remote --merge
 # link files/dirs
 for item in ${CONFIGS[*]}; do
   link ${dotdir}/${item} ~/${item}
+done
+
+# ensure config dirs are present
+for item in ${DIRS[*]}; do
+  mkdir -p ~/${item}
 done
 
 bashrc=~/.bashrc
