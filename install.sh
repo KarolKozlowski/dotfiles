@@ -49,14 +49,14 @@ echo "Updating submodules in ${dotdir}"
 git -C "${dotdir}" submodule init
 git -C "${dotdir}" submodule update --remote --merge
 
-# link files/dirs
-for item in ${CONFIGS[*]}; do
-  link ${dotdir}/${item} ~/${item}
-done
-
 # ensure config dirs are present
 for item in ${DIRS[*]}; do
   mkdir -p ~/${item}
+done
+
+# link files/dirs
+for item in ${CONFIGS[*]}; do
+  link ${dotdir}/${item} ~/${item}
 done
 
 bashrc=~/.bashrc
