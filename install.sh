@@ -9,6 +9,7 @@ CONFIGS=()
 CONFIGS+=(.inputrc .inputrc-sol) # inputrc
 CONFIGS+=(.screenrc) # screen
 CONFIGS+=(.vimrc .vim) # vim
+CONFIGS+=(.shellrc) # generic shell
 CONFIGS+=(.bashrc-global) # bash
 CONFIGS+=(.oh-my-zsh .zshrc .zsh .p10k.zsh) # zsh
 CONFIGS+=(.gnupg/gpg-agent.conf .gnupg/gpg.conf) # gpg

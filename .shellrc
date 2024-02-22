@@ -1,0 +1,62 @@
+# shell common options (bash, zsh, etc.)
+
+# set proper timezone
+export TZ='Europe/Warsaw'
+
+# Aliases for commonly used cmds
+alias ls="ls $LS_OPTIONS"
+alias ll="ls $LS_OPTIONS -l"
+alias l="ls $LS_OPTIONS -lA"
+alias pr='http_proxy=$proxy https_proxy=$proxy'
+alias rmb='find -name "*~" -print -delete'
+#alias pip="https_proxy=$proxy; pip --proxy=$http_proxy"
+
+# force simple authentication
+alias ldapsearch="ldapsearch -x"
+
+# alias for getting ssh keys from GitHub
+alias ssh-key-github='curl https://github.com/KarolKozlowski.keys'
+
+# preserve working dir across ssh sessions
+alias ssh='env SSH_PWD="$PWD" /bin/ssh'
+if [ -n "$SSH_PWD" ]; then
+   cd "$SSH_PWD"
+   unset SSH_PWD
+fi
+
+# setup ussers hosts file for tab-completion
+[ -e ~/.ssh/hosts ] && export HOSTFILE=~/.ssh/hosts
+
+# ~/bin
+PATH=$HOME/bin:$PATH
+# local python
+# PATH=$HOME/.local/bin:$PATH
+# npm
+PATH=$HOME/.npm-global/bin:$PATH
+# go path
+PATH=$HOME/go/bin:$PATH
+# Add current dir to PATH
+PATH=.:$PATH
+
+# CDPATH
+CDPATH=.
+CDPATH=$CDPATH:$HOME
+CDPATH=$CDPATH:$HOME/wa
+[ -d /var/lib/jenkins ] && CDPATH=$CDPATH:/var/lib/jenkins
+[ -d /mnt/c/Users/karol ] && CDPATH=${CDPATH}:/mnt/c/Users/karol
+
+export CDPATH
+
+# less config
+export LESS="--quit-if-one-screen --quit-at-eof --RAW-CONTROL-CHARS --no-init"
+
+# tell gpg where to ask for pass
+export GPG_TTY=$(tty)
+
+# the one and only
+export EDITOR=/usr/bin/vim
+
+function md() {
+    mkdir ${1}
+    cd ${1}
+}

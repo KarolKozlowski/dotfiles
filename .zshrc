@@ -113,7 +113,13 @@ source ~/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-alias ldapsearch="ldapsearch -x"
+# local secrets
+[ -r ~/.shellrc-secrets ] && source ~/.shellrc-secrets
 
-# tell gpg where to ask for pass
-export GPG_TTY=$(tty)
+# source common
+[ -r ~/.shellrc ] && source ~/.shellrc
+
+# local overrides
+[ -r ~/.shellrc-local ] && source ~/.shellrc-local
+
+alias bash="ENABLE_ZSH=false bash"
