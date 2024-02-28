@@ -54,23 +54,12 @@ major_release() {
 
 case `uname` in
     'Linux')
-        LS_OPTIONS="--color"
+        # on Linux
         host_color=${rgrn}
         [ $EUID -eq 0 ] && user_color=${rred}
-        # only on Linux
-        alias pys="echo 'http://'`hostname -f`':8000'; python -m SimpleHTTPServer 8000"
-        case $(major_release) in
-            '6')
-                # Enable git from RHSCL if available
-                [ -d /opt/rh/rh-git29 ] && source scl_source enable rh-git29
-                ;;
-            '7')
-                ;;
-        esac
-
         ;;
     'SunOS')
-        LS_OPTIONS=""
+        # on Solaris
         host_color=${lylw}
         export TERM=xterm
         [ $EUID -eq 0 ] && user_color=${rred}

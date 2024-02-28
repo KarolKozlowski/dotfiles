@@ -1,5 +1,17 @@
 # shell common options (bash, zsh, etc.)
 
+case `uname` in
+  'Linux')
+    LS_OPTIONS="--color"
+  ;;
+  'SunOS')
+  ;;
+  *)
+  echo 'What am I?'
+  ;;
+esac
+
+
 # set proper timezone
 export TZ='Europe/Warsaw'
 
@@ -10,6 +22,8 @@ alias l="ls $LS_OPTIONS -lA"
 alias pr='http_proxy=$proxy https_proxy=$proxy'
 alias rmb='find -name "*~" -print -delete'
 #alias pip="https_proxy=$proxy; pip --proxy=$http_proxy"
+
+alias pys="echo 'http://'`hostname -f`':8000'; python -m SimpleHTTPServer 8000"
 
 # force simple authentication
 alias ldapsearch="ldapsearch -x"
