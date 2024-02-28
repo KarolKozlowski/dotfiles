@@ -77,7 +77,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git dotenv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -125,3 +125,5 @@ source ~/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 # once zsh is running disable auto launch from bash
 #alias bash="ENABLE_ZSH=false bash"
 export ENABLE_ZSH=false
+
+
