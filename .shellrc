@@ -31,6 +31,9 @@ alias ldapsearch="ldapsearch -x"
 # alias for getting ssh keys from GitHub
 alias ssh-key-github='curl https://github.com/KarolKozlowski.keys'
 
+# pwgen shortcut
+alias pwg='pwgen -sny1 20'
+
 # preserve working dir across ssh sessions
 alias ssh='env SSH_PWD="$PWD" /bin/ssh'
 if [ -n "$SSH_PWD" ]; then
@@ -43,14 +46,16 @@ fi
 
 # ~/bin
 PATH=$HOME/bin:$PATH
-# local python
-# PATH=$HOME/.local/bin:$PATH
+# local bin
+PATH=$HOME/.local/bin:$PATH
 # npm
 PATH=$HOME/.npm-global/bin:$PATH
 # go path
 PATH=$HOME/go/bin:$PATH
 # Add current dir to PATH
 PATH=.:$PATH
+# include python site-packages in PATH
+#[ -n "${PYTHONPATH}" ] && PATH=${PYTHONPATH}:$PATH
 
 # CDPATH
 CDPATH=.
