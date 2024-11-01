@@ -77,7 +77,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git dotenv)
+plugins=(git dotenv python-fix docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -106,6 +106,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+pyuserpaths
 
 # enable powerleverl10k theme
 source ~/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
