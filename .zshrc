@@ -77,7 +77,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git dotenv python-fix docker)
+plugins=(git python-fix docker virtualenv autoenv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -128,4 +128,4 @@ source ~/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 #alias bash="ENABLE_ZSH=false bash"
 export ENABLE_ZSH=false
 
-
+export AUTOENV_ENABLE_LEAVE=yes

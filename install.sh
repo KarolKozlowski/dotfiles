@@ -11,6 +11,7 @@ CONFIGS+=(.screenrc) # screen
 CONFIGS+=(.vimrc .vim) # vim
 CONFIGS+=(.shellrc) # generic shell
 CONFIGS+=(.bashrc-global) # bash
+CONFIGS+=(.autoenv) # other
 CONFIGS+=(.oh-my-zsh .zshrc .zsh .p10k.zsh) # zsh
 CONFIGS+=(.gnupg/gpg-agent.conf .gnupg/gpg.conf) # gpg
 CONFIGS+=(.gitconfig .gitignore-global) # git
