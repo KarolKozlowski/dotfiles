@@ -30,7 +30,7 @@ link() {
   if [[ -L ${destination} ]]; then
     echo "${destination} link already exists"
   elif [[ -e ${destination} ]]; then
-    echo "${destination} already exists but is not a link (inspect manually)"
+    echo "WARN: ${destination} already exists but is not a link (inspect manually)"
     # TODO: automation for removing here, but:
     # inspection diff/inspection would be too cumbersome
   else
