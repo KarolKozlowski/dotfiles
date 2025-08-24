@@ -61,6 +61,12 @@ for item in "${CONFIGS[@]}"; do
   link "${dotdir}/${item}" "${HOME}/${item}"
 done
 
+# link custom oh-my-zsh plugins
+for item in oh-my-zsh-plugins/*; do
+    plugin_name=$(basename "${item}")
+    link "${dotdir}/${item}" "${HOME}/.oh-my-zsh/custom/plugins/${plugin_name}"
+done
+
 bashrc=~/.bashrc
 if grep -q '.bashrc-global' ${bashrc}; then
     echo "INFO: ~/.bashrc-global already sourced in ${bashrc}"
