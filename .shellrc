@@ -61,6 +61,7 @@ PATH=.:$PATH
 CDPATH=.
 CDPATH=$CDPATH:$HOME
 CDPATH=$CDPATH:$HOME/wa
+CDPATH=$CDPATH:$HOME/wa/ansible
 [ -d /var/lib/jenkins ] && CDPATH=$CDPATH:/var/lib/jenkins
 [ -d /mnt/c/Users/karol ] && CDPATH=${CDPATH}:/mnt/c/Users/karol
 
