@@ -35,7 +35,7 @@ link() {
     # inspection diff/inspection would be too cumbersome
   else
     if [[ -e ${source} ]]; then
-      ln -s ${source} ${destination}
+      ln -s "${source}" "${destination}"
       echo "linked ${source} to ${destination}"
     else
       echo "ERROR: ${source} does not exist"
@@ -44,7 +44,7 @@ link() {
 }
 
 # save scripts directory
-dotdir=$(dirname $(readlink -f $0))
+dotdir=$(dirname "$(readlink -f "$0")")
 
 # updatesubmodules
 echo "Updating submodules in ${dotdir}"
@@ -52,13 +52,13 @@ git -C "${dotdir}" submodule init
 git -C "${dotdir}" submodule update --remote --merge
 
 # ensure config dirs are present
-for item in ${DIRS[*]}; do
-  mkdir -p ~/${item}
+for item in "${DIRS[@]}"; do
+  mkdir -p "${HOME}/${item}"
 done
 
 # link files/dirs
-for item in ${CONFIGS[*]}; do
-  link ${dotdir}/${item} ~/${item}
+for item in "${CONFIGS[@]}"; do
+  link "${dotdir}/${item}" "${HOME}/${item}"
 done
 
 bashrc=~/.bashrc
