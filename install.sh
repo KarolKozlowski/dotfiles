@@ -28,7 +28,14 @@ link() {
   destination=$2
 
   if [[ -L ${destination} ]]; then
-    echo "${destination} link already exists"
+    if [ "$use_force" == "true" ]; then
+      echo "${destination} link already exists, force update"
+      rm "${destination}"
+      ln -s "${source}" "${destination}"
+      echo "linked ${source} to ${destination}"
+    else
+      echo "${destination} link already exists"
+    fi
   elif [[ -e ${destination} ]]; then
     echo "WARN: ${destination} already exists but is not a link (inspect manually)"
     # TODO: automation for removing here, but:
