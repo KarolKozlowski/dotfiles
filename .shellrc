@@ -47,6 +47,9 @@ if [ -n "$SSH_PWD" ]; then
    unset SSH_PWD
 fi
 
+# setup ssh agent bridge
+[ -e ~/wa/shellpers/agent-bridge.sh ] && source ~/wa/shellpers/agent-bridge.sh
+
 # setup ussers hosts file for tab-completion
 [ -e ~/.ssh/hosts ] && export HOSTFILE=~/.ssh/hosts
 
