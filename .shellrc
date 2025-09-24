@@ -32,7 +32,13 @@ alias ldapsearch="ldapsearch -x"
 alias ssh-key-github='curl https://github.com/KarolKozlowski.keys'
 
 # pwgen shortcut
-alias pwg='pwgen -sny1 20'
+#alias pwg='pwgen -sny1 20'
+function pw() {
+  LC_ALL=C tr -dc '[:alnum:]' </dev/urandom | head -c ${1:-32}; echo
+}
+function pwg() {
+  LC_ALL=C tr -dc '[:graph:]' </dev/urandom | head -c ${1:-20}; echo
+}
 
 # preserve working dir across ssh sessions
 alias ssh='env SSH_PWD="$PWD" /bin/ssh'
