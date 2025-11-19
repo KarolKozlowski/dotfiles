@@ -130,3 +130,6 @@ let g:syntastic_check_on_open = enable_syntastic
 let g:syntastic_puppet_puppetlint_args = '--no_class_inherits_from_params_class-check --no-80chars-check'
 let g:syntastic_python_flake8_post_args = '--ignore=E501'
 
+" make vim window transparrent in windows terminal
+autocmd vimenter * ++nested highlight Normal ctermbg=NONE guibg=NONE
+
