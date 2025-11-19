@@ -1,6 +1,6 @@
 [user]
-    name  = Karol Kozłowski
-    email = 1903092+KarolKozlowski@users.noreply.github.com
+    # name  = Karol Kozłowski
+    # email = karol.kozlowski@dotnot.pl
     # set email per repository using:
     # git config user.email
 
@@ -8,11 +8,14 @@
     st    = status
     ci    = commit
     co    = checkout
+    dc    = diff --cached
     b     = branch
     br    = branch -a
     p     = pull -r -p
     l     = log --oneline
     glog  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+    in    = !git init && git mail
+    mail  = !git config user.email 'karol.kozlowski@dotnot.pl' && git config user.name 'Karol Kozlowski' && git signing-on
     signing-on = !git config user.signingkey B6C2D04B5D1136D1 && git config commit.gpgsign true
     signing-off = !git config --unset user.signingkey && git config commit.gpgsign false
     permission-reset = !git diff -p -R --no-ext-diff --no-color --diff-filter=M | grep -E \"^(diff|(old|new) mode)\" --color=never | git apply
