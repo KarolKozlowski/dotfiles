@@ -46,6 +46,7 @@
 
 [push]
     default = simple
+
 [diff]
     ignore-all-space = true
 
@@ -53,7 +54,12 @@
     windowMemory = 100m
     SizeLimit = 100m
     threads = 1
+
 [gpg]
-	program = gpg2
+    program = gpg2
+
 [init]
-	defaultBranch = main
+    defaultBranch = main
+
+[commit]
+    gpgSign = true
