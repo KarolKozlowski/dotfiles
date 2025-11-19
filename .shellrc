@@ -64,7 +64,7 @@ PATH=$HOME/.npm-global/bin:$PATH
 # go path
 PATH=$HOME/go/bin:$PATH
 # Add current dir to PATH
-PATH=.:$PATH
+# PATH=.:$PATH
 # include python site-packages in PATH
 #[ -n "${PYTHONPATH}" ] && PATH=${PYTHONPATH}:$PATH
 
