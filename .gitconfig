@@ -15,6 +15,7 @@
     l     = log --oneline
     glog  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
     in    = !git init && git mail
+    gh    = !git config user.email '1903092+KarolKozlowski@users.noreply.github.com'
     mail  = !git config user.email 'karol.kozlowski@dotnot.pl' && git config user.name 'Karol Kozlowski' && git signing-on
     signing-on = !git config user.signingkey B6C2D04B5D1136D1 && git config commit.gpgsign true
     signing-off = !git config --unset user.signingkey && git config commit.gpgsign false
