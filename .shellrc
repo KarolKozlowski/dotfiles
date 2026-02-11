@@ -1,5 +1,8 @@
 # shell common options (bash, zsh, etc.)
 
+# set default umask
+umask 027
+
 case `uname` in
   'Linux')
     LS_OPTIONS="--color"
