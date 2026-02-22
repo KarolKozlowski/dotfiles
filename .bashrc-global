@@ -92,6 +92,9 @@ esac
 [ -e $HOME/.asdf/asdf.sh ] && . $HOME/.asdf/asdf.sh
 [ -e $HOME/.asdf/completions/asdf.bash ] && . $HOME/.asdf/completions/asdf.bash
 
+# Visual Studio Code Terminal Shell Integration
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"
+
 if which direnv > /dev/null 2>&1; then
   eval "$(direnv hook bash)"
 fi

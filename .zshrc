@@ -124,6 +124,9 @@ source ~/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 # local overrides
 [ -r ~/.shellrc-local ] && source ~/.shellrc-local
 
+# Visual Studio Code Terminal Shell Integration
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+
 # once zsh is running disable auto launch from bash
 #alias bash="ENABLE_ZSH=false bash"
 export ENABLE_ZSH=false
