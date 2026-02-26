@@ -38,8 +38,10 @@
     prompt = false
 
 [merge]
-    tool = vimdiff
+    tool = vscode
     conflictstyle = diff3
+[mergetool "vscode"]
+    cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 
 [status]
     showUntrackedFiles = all
