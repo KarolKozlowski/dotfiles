@@ -70,6 +70,8 @@ PATH=$HOME/go/bin:$PATH
 # PATH=.:$PATH
 # include python site-packages in PATH
 #[ -n "${PYTHONPATH}" ] && PATH=${PYTHONPATH}:$PATH
+# opencode
+export PATH=/home/karol.kozlowski/.opencode/bin:$PATH
 
 # CDPATH
 CDPATH=.
