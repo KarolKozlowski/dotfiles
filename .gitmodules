@@ -31,3 +31,6 @@
 [submodule ".autoenv"]
 	path = .autoenv
 	url = https://github.com/hyperupcall/autoenv
+[submodule ".tmux/plugins/tpm"]
+	path = .tmux/plugins/tpm
+	url = https://github.com/tmuxpack/tpack

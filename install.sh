@@ -7,7 +7,8 @@
 # List of managed config files
 CONFIGS=()
 CONFIGS+=(.inputrc .inputrc-sol) # inputrc
-CONFIGS+=(.screenrc .tmux.conf) # screen
+CONFIGS+=(.screenrc) # screen
+CONFIGS+=(.tmux .tmux.conf) # tmux
 CONFIGS+=(.vimrc .vim) # vim
 CONFIGS+=(.shellrc) # generic shell
 CONFIGS+=(.bashrc-global) # bash

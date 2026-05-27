@@ -1,4 +1,12 @@
 # ignore vim views
 .vim/view/
+
 # ignore vim history
 .vim/.netrwhist
+
+# Ignore all tmux plugins
+.tmux/plugins/*
+
+# But keep TPM itself (submodule or plain dir)
+!.tmux/plugins/tpm/
+
