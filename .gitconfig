@@ -67,3 +67,7 @@
 
 [commit]
     gpgSign = true
+
+[include]
+    path = ~/.gitconfig-local
+
