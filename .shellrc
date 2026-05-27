@@ -28,6 +28,37 @@ alias rmb='find -name "*~" -print -delete'
 
 alias pys="echo 'http://'`hostname -f`':8000'; python -m SimpleHTTPServer 8000"
 
+# Generic "run in container" helper
+in-docker() {
+  local image="$1"
+  shift
+  docker run \
+    -v "$PWD":/workspace:Z \
+    -w /workspace \
+    --rm -it \
+    "$image" "$@"
+}
+
+# Minimal base images
+
+in-alpine() {
+  in-docker alpine:latest "$@"
+}
+
+in-busybox() {
+  in-docker busybox:latest "$@"
+}
+
+n-ubuntu() {
+  # - ubuntu:rolling or ubuntu:24.04 for current
+  # - ubuntu:24.04-minimal
+  in-docker ubuntu:24.04 "$@"
+}
+
+in-rocky9() {
+  in-docker rockylinux:9 "$@"
+}
+
 # force simple authentication
 alias ldapsearch="ldapsearch -x"
 
