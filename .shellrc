@@ -119,7 +119,9 @@ export CDPATH
 export LESS="--quit-if-one-screen --quit-at-eof --RAW-CONTROL-CHARS --no-init"
 
 # tell gpg where to ask for pass
-export GPG_TTY=$(tty)
+if [[ -o interactive && -n $TTY ]]; then
+  export GPG_TTY="$TTY"
+fi
 
 # the one and only
 export EDITOR=/usr/bin/vim
