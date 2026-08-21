@@ -126,7 +126,7 @@ fi
 # the one and only
 export EDITOR=/usr/bin/vim
 
-unalias md
+unalias md 2>/dev/null
 function md() {
     mkdir -p "${1}"
     cd "${1}"
