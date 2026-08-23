@@ -126,6 +126,12 @@ fi
 # the one and only
 export EDITOR=/usr/bin/vim
 
+# check for dtop binary and unalias dtop if present
+if { [ -n "${ZSH_VERSION-}" ] && whence -p dtop >/dev/null; } ||
+   { [ -z "${ZSH_VERSION-}" ] && type -P dtop >/dev/null; }; then
+  unalias dtop 2>/dev/null
+fi
+
 unalias md 2>/dev/null
 function md() {
     mkdir -p "${1}"
