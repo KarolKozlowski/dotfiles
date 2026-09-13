@@ -31,7 +31,7 @@ _container_engine() {
 }
 
 # Generic "run current dir in container"
-in-container() {
+in_container() {
   local image="$1"
   shift
 
@@ -45,10 +45,10 @@ in-container() {
     "$image" "$@"
 }
 
-in-rocky9()   { in-container rockylinux:9 "$@"; }
-in-alpine()   { in-container alpine:latest "$@"; }
-in-busybox()  { in-container busybox:latest "$@"; }
-in-ubuntu()   { in-container ubuntu:24.04 "$@"; }
+in_rocky9()   { in_container rockylinux:9 "$@"; }
+in_alpine()   { in_container alpine:latest "$@"; }
+in_busybox()  { in_container busybox:latest "$@"; }
+in_ubuntu()   { in_container ubuntu:24.04 "$@"; }
 
 # Aliases for commonly used cmds
 alias ls="ls $LS_OPTIONS"
