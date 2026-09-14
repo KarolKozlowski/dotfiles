@@ -6,7 +6,11 @@ return {
     "Mofiqul/dracula.nvim",
     lazy = false,
     priority = 1000,
-    config = function()
+    opts = {
+      transparent_bg = true, -- use the terminal's own background instead of dracula's
+    },
+    config = function(_, opts)
+      require("dracula").setup(opts)
       vim.cmd.colorscheme("dracula")
     end,
   },
