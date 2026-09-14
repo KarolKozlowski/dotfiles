@@ -6,7 +6,7 @@
 
 # List of managed config files
 CONFIGS=()
-CONFIGS+=(.stignore .stignore.global .stignore.local)
+CONFIGS+=(.stignore .stignore.global)
 CONFIGS+=(.inputrc .inputrc-sol) # inputrc
 CONFIGS+=(.screenrc) # screen
 CONFIGS+=(.tmux .tmux.conf) # tmux
@@ -17,6 +17,12 @@ CONFIGS+=(.autoenv) # other
 CONFIGS+=(.oh-my-zsh .zshrc .zsh .p10k.zsh) # zsh
 CONFIGS+=(.gnupg/gpg-agent.conf .gnupg/gpg.conf) # gpg
 CONFIGS+=(.gitconfig .gitignore-global) # git
+
+# List of stub files: copied from template on first install, then left
+# untouched so host-specific edits are not overwritten (nor tracked back).
+STUBS=()
+STUBS+=(.stignore.local)
+STUBS+=(.shellrc-local)
 
 # List of config dirs that might be missing on target
 # TODO: inherit this from config links
@@ -52,6 +58,22 @@ link() {
   fi
 }
 
+# function for creating a stub file from a template, once
+stub() {
+  # takes 2 paremeters:
+  source=$1
+  destination=$2
+
+  if [[ -e ${destination} ]]; then
+    echo "${destination} already exists, leaving untouched"
+  elif [[ -e ${source} ]]; then
+    cp "${source}" "${destination}"
+    echo "created ${destination} from ${source} template"
+  else
+    echo "ERROR: ${source} does not exist"
+  fi
+}
+
 # save scripts directory
 dotdir=$(dirname "$(readlink -f "$0")")
 
@@ -63,6 +85,11 @@ done
 # link files/dirs
 for item in "${CONFIGS[@]}"; do
   link "${dotdir}/${item}" "${HOME}/${item}"
+done
+
+# create stub files from templates, if missing
+for item in "${STUBS[@]}"; do
+  stub "${dotdir}/${item}" "${HOME}/${item}"
 done
 
 # link custom oh-my-zsh plugins
