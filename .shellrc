@@ -54,11 +54,17 @@ in_ubuntu()   { in_container ubuntu:24.04 "$@"; }
 alias ls="ls $LS_OPTIONS"
 alias ll="ls $LS_OPTIONS -l"
 alias l="ls $LS_OPTIONS -lA"
-alias pr='http_proxy=$proxy https_proxy=$proxy'
+function pr() {
+  if [ -z "${proxy}" ]; then
+    echo "WARN: \$proxy is not set" >&2
+    return 1
+  fi
+  http_proxy="$proxy" https_proxy="$proxy" "$@"
+}
 alias rmb='find -name "*~" -print -delete'
 #alias pip="https_proxy=$proxy; pip --proxy=$http_proxy"
 
-alias pys="echo 'http://'`hostname -f`':8000'; python -m SimpleHTTPServer 8000"
+alias pys="echo 'http://'`hostname -f`':8000'; python3 -m http.server 8000"
 
 # force simple authentication
 alias ldapsearch="ldapsearch -x"
@@ -103,7 +109,7 @@ PATH=$HOME/go/bin:$PATH
 # include python site-packages in PATH
 #[ -n "${PYTHONPATH}" ] && PATH=${PYTHONPATH}:$PATH
 # opencode
-export PATH=/home/karol.kozlowski/.opencode/bin:$PATH
+export PATH=$HOME/.opencode/bin:$PATH
 
 # CDPATH
 CDPATH=.
