@@ -1,0 +1,58 @@
+# SSH: keep only config, ignore keys and other state
+.ssh/*
+!.ssh/config
+
+# Ignore the entire user cache tree (safe to regenerate)
+.cache/**
+
+# Ignore most user config/state directories
+.config/**
+.local/**
+.nx/**
+
+# Python virtualenvs and caches
+**/.venv/**
+**/venv/**
+**/.env/**
+**/.tox/**
+**/.mypy_cache/**
+**/.pytest_cache/**
+**/.ruff_cache/**
+**/__pycache__/**
+
+# Go module/cache trees
+.gopkg/**
+**/pkg/mod/**
+**/pkg/sumdb/**
+**/pkg/**
+
+# Node / Bun / JS tool caches
+**/node_modules/**
+**/.npm/**
+**/.yarn/**
+**/.pnpm-store/**
+**/.bun/**
+**/bun-install-cache/**
+**/bun-install-cache*/**
+
+# VS Code desktop extensions and remote server
+.vscode/extensions/**
+.vscode-server/**
+
+# Temporary NFS handles and Syncthing marker
+/.nfs*
+.stfolder
+
+# Editor swap / temp files
+.*.swp
+.viminfo
+.zcompdump*
+
+# Shell history
+.zsh_history
+
+# Snap-managed application data
+snap
+
+# Optional: R library tree (only if you do not want R packages synced)
+.local/lib/R/site-library/**

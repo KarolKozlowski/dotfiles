@@ -1,0 +1,7 @@
+# Syncthing ignore configuration file
+
+# Common ignore patterns
+#include .stignore.global
+
+# Host-specific patterns; file is installed as an empty stub if absent.
+#include .stignore.local

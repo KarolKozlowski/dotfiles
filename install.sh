@@ -6,6 +6,7 @@
 
 # List of managed config files
 CONFIGS=()
+CONFIGS+=(.stignore .stignore.global .stignore.local)
 CONFIGS+=(.inputrc .inputrc-sol) # inputrc
 CONFIGS+=(.screenrc) # screen
 CONFIGS+=(.tmux .tmux.conf) # tmux
