@@ -10,3 +10,6 @@
 # But keep TPM itself (submodule or plain dir)
 !.tmux/plugins/tpm/
 
+# lazy.nvim plugin lockfile, host-specific
+.config/nvim/lazy-lock.json
+
