@@ -124,7 +124,8 @@ if [[ -o interactive && -n $TTY ]]; then
 fi
 
 # the one and only
-export EDITOR=/usr/bin/vim
+export EDITOR="$(command -v nvim || command -v vim)"
+alias vim=nvim
 
 # check for dtop binary and unalias dtop if present
 if { [ -n "${ZSH_VERSION-}" ] && whence -p dtop >/dev/null; } ||
