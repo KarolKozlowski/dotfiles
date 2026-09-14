@@ -18,6 +18,11 @@ CONFIGS+=(.oh-my-zsh .zshrc .zsh .p10k.zsh) # zsh
 CONFIGS+=(.gnupg/gpg-agent.conf .gnupg/gpg.conf) # gpg
 CONFIGS+=(.gitconfig .gitignore-global) # git
 
+# List of managed config files, linked into ~/.config instead of ~
+# (named after the XDG Base Directory spec, which defines ~/.config)
+CONFIGS_XDG=()
+CONFIGS_XDG+=(nvim) # neovim
+
 # List of stub files: copied from template on first install, then left
 # untouched so host-specific edits are not overwritten (nor tracked back).
 STUBS=()
@@ -85,6 +90,12 @@ done
 # link files/dirs
 for item in "${CONFIGS[@]}"; do
   link "${dotdir}/${item}" "${HOME}/${item}"
+done
+
+# link files/dirs targeting ~/.config
+mkdir -p "${HOME}/.config"
+for item in "${CONFIGS_XDG[@]}"; do
+  link "${dotdir}/.config/${item}" "${HOME}/.config/${item}"
 done
 
 # create stub files from templates, if missing
