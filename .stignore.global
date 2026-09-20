@@ -1,58 +1,92 @@
-# SSH: keep only config, ignore keys and other state
-.ssh/*
-!.ssh/config
+# SSH: retain only non-secret portable client configuration.
+/.ssh/*
+!/.ssh/config
 
-# Ignore the entire user cache tree (safe to regenerate)
-.cache/**
+# Regenerable user cache.
+(?d)/.cache/**
 
-# Ignore most user config/state directories
-.config/**
-.local/**
-.nx/**
+# Host-local configuration/state.
+# Do NOT use (?d): these may contain valuable state, credentials, or local data.
+/.config/**
+/.local/**
 
-# Python virtualenvs and caches
-**/.venv/**
-**/venv/**
-**/.env/**
-**/.tox/**
-**/.mypy_cache/**
-**/.pytest_cache/**
-**/.ruff_cache/**
-**/__pycache__/**
+# Nx: normally regenerable workspace/tool state.
+# Use ordinary ignore instead if ~/.nx contains configuration you want retained.
+/.nx/**
 
-# Go module/cache trees
-.gopkg/**
-**/pkg/mod/**
-**/pkg/sumdb/**
-**/pkg/**
+# Python: all safe to recreate from requirements/lock files.
+(?d)**/.venv
+(?d)**/.venv/**
+(?d)**/venv
+(?d)**/venv/**
+(?d)**/.tox
+(?d)**/.tox/**
+(?d)**/.mypy_cache
+(?d)**/.mypy_cache/**
+(?d)**/.pytest_cache
+(?d)**/.pytest_cache/**
+(?d)**/.ruff_cache
+(?d)**/.ruff_cache/**
+(?d)**/__pycache__
+(?d)**/__pycache__/**
 
-# Node / Bun / JS tool caches
-**/node_modules/**
-**/.npm/**
-**/.yarn/**
-**/.pnpm-store/**
-**/.bun/**
-**/bun-install-cache/**
-**/bun-install-cache*/**
+# Never synchronize project .env files.
+# Do NOT use (?d) unless every .env is definitely disposable.
+/.env
+**/.env
 
-# VS Code desktop extensions and remote server
-.vscode/extensions/**
-.vscode-server/**
+# Go module/cache trees.
+# IMPORTANT: remove **/pkg/** — it hides real source directories.
+/.gopkg/**
+/go/pkg/mod/**
+/go/pkg/sumdb/**
 
-# Temporary NFS handles and Syncthing marker
-/.nfs*
-.stfolder
+# If ~/.gopkg and ~/go/pkg/mod are purely caches on every host, use:
+# (?d)/.gopkg/**
+# (?d)/go/pkg/mod/**
+# (?d)/go/pkg/sumdb/**
 
-# Editor swap / temp files
-.*.swp
-.viminfo
-.zcompdump*
+# Node/Bun/JS generated dependencies and caches.
+(?d)**/node_modules
+(?d)**/node_modules/**
+(?d)**/.npm
+(?d)**/.npm/**
+(?d)**/.yarn
+(?d)**/.yarn/**
+(?d)**/.pnpm-store
+(?d)**/.pnpm-store/**
+(?d)**/.bun
+(?d)**/.bun/**
+(?d)**/bun-install-cache
+(?d)**/bun-install-cache/**
+(?d)**/bun-install-cache*/
+(?d)**/bun-install-cache*/**
 
-# Shell history
-.zsh_history
+# VS Code remote/server installations and extensions.
+# These are reinstallable; deletion may cause a re-download/rebuild.
+(?d)/.vscode/extensions
+(?d)/.vscode/extensions/**
+(?d)/.vscode-server
+(?d)/.vscode-server/**
 
-# Snap-managed application data
-snap
+# Transient NFS handles and Syncthing marker.
+(?d)/.nfs*
+/.stfolder
 
-# Optional: R library tree (only if you do not want R packages synced)
-.local/lib/R/site-library/**
+# Editor temporary/recovery files.
+(?d)**/*.swp
+(?d)**/*.swo
+(?d)**/*~
+(?d)/.viminfo
+
+# Shell history is local state, not disposable build output.
+/.zsh_history
+/.zcompdump*
+
+# Snap-managed application data: retain unless you explicitly want
+# local Snap application data deleted with a remotely deleted parent.
+/snap/**
+
+# Optional R library. It is reinstallable but may be expensive to restore.
+# Keep ordinary ignore unless automatic deletion is explicitly desired.
+/.local/lib/R/site-library/**
