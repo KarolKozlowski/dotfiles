@@ -12,6 +12,7 @@
 
 # Nx: normally regenerable workspace/tool state.
 # Use ordinary ignore instead if ~/.nx contains configuration you want retained.
+/.nx
 /.nx/**
 
 # Python: all safe to recreate from requirements/lock files.
