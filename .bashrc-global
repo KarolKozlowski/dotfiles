@@ -111,6 +111,15 @@ exitstatus() {
     fi
 }
 
+# Helper to render red SEC_ENV indicator if active
+sec_env() {
+    if [ -n "${SEC_ENV:-}" ]; then
+        # Uses your red color variable (or fallback ANSI bold red)
+        local red="${rred:-\[\033[1;31m\]}"
+        echo -ne "${red}(${SEC_ENV})${rst} "
+    fi
+}
+
 scm() {
     info=""
 
@@ -146,5 +155,5 @@ if [ "$SSH_CONNECTION" == "" ]; then
     fi
 fi
 
-PS1="${user_color}\\u${rst}@${host_color}${host_alias}${rst} \$(exitstatus)\w${rst}\$(scm)\\$ "
+PS1="\$(sec_env)${user_color}\\u${rst}@${host_color}${host_alias}${rst} \$(exitstatus)\w${rst}\$(scm)\\$ "
 PS2="${lylw}> ${rst}"

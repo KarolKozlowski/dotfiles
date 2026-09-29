@@ -19,6 +19,14 @@
 'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
 
 () {
+  # Custom Powerlevel10k segment for SEC_ENV
+  function prompt_sec_env() {
+    if [[ -n "${SEC_ENV:-}" ]]; then
+      # Syntax: p10k segment -f <foreground> -t <text>
+      p10k segment -f red -t "(${SEC_ENV})"
+    fi
+  }
+
   emulate -L zsh -o extended_glob
 
   # Unset all configuration options. This allows you to apply configuration changes without
@@ -30,6 +38,7 @@
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+    sec_env
     # =========================[ Line #1 ]=========================
     # os_icon               # os identifier
     context                 # user@hostname
