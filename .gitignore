@@ -13,3 +13,7 @@
 # lazy.nvim plugin lockfile, host-specific
 .config/nvim/lazy-lock.*
 
+# Ignore OpenCode dynamic runtime & lock files
+.config/opencode/service.json
+.config/opencode/package-lock.json
+

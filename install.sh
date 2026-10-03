@@ -21,7 +21,8 @@ CONFIGS+=(.gitconfig .gitignore-global) # git
 # List of managed config files, linked into ~/.config instead of ~
 # (named after the XDG Base Directory spec, which defines ~/.config)
 CONFIGS_XDG=()
-CONFIGS_XDG+=(nvim) # neovim
+CONFIGS_XDG+=(nvim)     # neovim
+CONFIGS_XDG+=(opencode) # opencode
 
 # List of stub files: copied from template on first install, then left
 # untouched so host-specific edits are not overwritten (nor tracked back).
