@@ -3,11 +3,18 @@
 
   "default_agent": "plan",
 
-  "mcpServers": {
+  "mcp": {
     "searxng-search": {
-      "command": "python3",
-      "args": ["/home/karol.kozlowski/wa/shellpers/searxng-mcp.py"]
+      "type": "local",
+      "command": [
+        "python3",
+        "/home/karol.kozlowski/wa/shellpers/searxng-mcp.py"
+      ]
     }
+  },
+
+  "tools": {
+    "searxng-search/*": true
   },
 
   "provider": {
