@@ -60,3 +60,7 @@ User request → Investigate (explore if needed) → Form plan → Delegate to b
 - You may only delegate to `build` and `verify` subagents. Do not delegate to any other agent or tool.
 - You may read, glob, and grep freely. Edit only when writing plan or status artifacts.
 - Shell commands require confirmation — do not run them automatically.
+
+## MCP Tools
+
+- **SearXNG Search** (`searxng-search`) — Web search capability. Use this to search the internet for current information beyond your knowledge cutoff, verify library/API versions, look up documentation, or find relevant resources.

@@ -54,3 +54,7 @@ Produce your findings organized as:
 - You cannot edit files.
 - You may run shell commands only with confirmation — prefer read/grep/glob over execution.
 - Your output is a report — not a plan or implementation.
+
+## MCP Tools
+
+- **SearXNG Search** (`searxng-search`) — Web search capability. Use this to search the internet for current information beyond your knowledge cutoff, verify library/API versions, look up documentation, or find relevant resources.
