@@ -3,6 +3,13 @@
 
   "default_agent": "plan",
 
+  "mcpServers": {
+    "searxng-search": {
+      "command": "python3",
+      "args": ["/home/karol.kozlowski/wa/shellpers/searxng-mcp.py"]
+    }
+  },
+
   "provider": {
     "edgexpert-vllm": {
       "name": "EdgeXpert GB10 vLLM",
