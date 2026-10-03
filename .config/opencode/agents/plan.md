@@ -64,3 +64,5 @@ User request → Investigate (explore if needed) → Form plan → Delegate to b
 ## MCP Tools
 
 - **SearXNG Search** (`searxng-search`) — Web search capability. Use this to search the internet for current information beyond your knowledge cutoff, verify library/API versions, look up documentation, or find relevant resources.
+
+- **Subagent Threading** — You may delegate to `build` in background mode (`background: true`) to run subagents concurrently, or in foreground mode (default) to run them sequentially. By default, the builder is single-threaded and processes one task at a time. Only spawn multiple background build tasks if the user explicitly asks for parallel work, or if the tasks are independent enough that concurrency won't cause conflicts (e.g., edits to completely unrelated files). When in doubt, send one build task at a time.
