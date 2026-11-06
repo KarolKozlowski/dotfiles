@@ -12,7 +12,7 @@ CONFIGS+=(.screenrc) # screen
 CONFIGS+=(.tmux .tmux.conf) # tmux
 CONFIGS+=(.vimrc .vim) # vim
 CONFIGS+=(.shellrc) # generic shell
-CONFIGS+=(.bashrc-global) # bash
+CONFIGS+=(.bashrc) # bash
 CONFIGS+=(.autoenv) # other
 CONFIGS+=(.oh-my-zsh .zshrc .zsh .p10k.zsh) # zsh
 CONFIGS+=(.gnupg/gpg-agent.conf .gnupg/gpg.conf) # gpg
@@ -110,10 +110,3 @@ for item in oh-my-zsh-plugins/*; do
     link "${dotdir}/${item}" "${HOME}/.oh-my-zsh/custom/plugins/${plugin_name}"
 done
 
-bashrc=~/.bashrc
-if grep -q '.bashrc-global' ${bashrc}; then
-    echo "INFO: ~/.bashrc-global already sourced in ${bashrc}"
-else
-    echo "Adding bashrc-global to ${bashrc}"
-    echo -e "\nif [ -f ~/.bashrc-global ]; then\n    source ~/.bashrc-global\nfi" >> ${bashrc}
-fi
