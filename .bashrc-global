@@ -89,16 +89,5 @@ scm() {
     echo -ne "$info"
 }
 
-# run powerline only on non-ssh shells
-if [ "$SSH_CONNECTION" == "" ]; then
-    if [ -e /usr/share/powerline/bindings/bash/powerline.sh ]; then
-        # powerline
-        powerline-daemon -q
-        POWERLINE_BASH_CONTINUATION=1
-        POWERLINE_BASH_SELECT=1
-        . /usr/share/powerline/bindings/bash/powerline.sh
-    fi
-fi
-
 PS1="\$(sec_env)${user_color:-${lblu}}\\u${rst}@${host_color:-${rgrn}}${host_alias:-\\h}${rst} \$(exitstatus)\w${rst}\$(scm)\\$ "
 PS2="${lylw}> ${rst}"
