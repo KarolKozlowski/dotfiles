@@ -1,2 +1,2 @@
 # untracked/local, host-specific shell configuration
-export ENABLE_ZSH=${ENABLE_ZSH:-true}
+export FORCE_ZSH=${FORCE_ZSH:-true}

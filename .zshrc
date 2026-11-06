@@ -127,8 +127,8 @@ source ~/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 # Visual Studio Code Terminal Shell Integration
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
 
-# once zsh is running disable auto launch from bash
-#alias bash="ENABLE_ZSH=false bash"
-export ENABLE_ZSH=false
+# Prevent child Bash shells from handing back to Zsh.
+unset FORCE_ZSH
+export SHELL_AUTOEXEC_DONE=true
 
 export AUTOENV_ENABLE_LEAVE=yes

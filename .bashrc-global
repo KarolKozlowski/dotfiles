@@ -28,13 +28,15 @@ lf=' '
 # local secrets
 [ -r ~/.shellrc-secrets ] && source ~/.shellrc-secrets
 
-# local overrides (may set ENABLE_ZSH; sourced early so we can exec zsh below
+# local overrides (may set FORCE_ZSH; sourced early so we can exec zsh below
 # without also paying for sourcing .shellrc, since zsh sources it again itself)
 [ -r ~/.shellrc-local ] && source ~/.shellrc-local
 
 # to enable zsh:
-# echo 'export ENABLE_ZSH=${ENABLE_ZSH:-true}' >> ~/.shellrc-local
-if [ "${ENABLE_ZSH}" = true ] && test -t 1 && command -v zsh > /dev/null; then
+# echo 'export FORCE_ZSH=${FORCE_ZSH:-true}' >> ~/.shellrc-local
+if [ "${SHELL_AUTOEXEC_DONE:-}" != true ] &&
+    [ "${FORCE_ZSH:-false}" = true ] && test -t 1 && command -v zsh > /dev/null; then
+    export SHELL_AUTOEXEC_DONE=true
     exec zsh
 fi
 
