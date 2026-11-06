@@ -1,5 +1,8 @@
 # shell common options (bash, zsh, etc.)
 
+# Host secrets are shared by Bash and Zsh.
+[ -r ~/.shellrc-secrets ] && source ~/.shellrc-secrets
+
 # ANSI colors; \001 and \002 mark nonprinting sequences for Bash Readline.
 rblk="\001\e[0;30m\002" # Black
 rred="\001\e[0;31m\002" # Regular Red
@@ -168,3 +171,6 @@ function md() {
     mkdir -p "${1}"
     cd "${1}"
 }
+
+# Host-specific overrides are applied after shared defaults.
+[ -r ~/.shellrc-local ] && source ~/.shellrc-local

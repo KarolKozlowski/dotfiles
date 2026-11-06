@@ -6,9 +6,6 @@
 #lf=' \n'   # Line Feed
 lf=' '
 
-# local secrets
-[ -r ~/.shellrc-secrets ] && source ~/.shellrc-secrets
-
 # local overrides (may set FORCE_ZSH; sourced early so we can exec zsh below
 # without also paying for sourcing .shellrc, since zsh sources it again itself)
 [ -r ~/.shellrc-local ] && source ~/.shellrc-local
@@ -23,9 +20,6 @@ fi
 
 # source common
 [ -r ~/.shellrc ] && source ~/.shellrc
-
-# re-apply local overrides on top of .shellrc (bash-only path)
-[ -r ~/.shellrc-local ] && source ~/.shellrc-local
 
 # Keep the root prompt distinct, even if a local user_color override exists.
 [[ $EUID -eq 0 ]] && user_color=${rred}

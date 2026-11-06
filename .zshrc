@@ -5,6 +5,13 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Load shared environment, secrets, and host overrides before plugins.
+[ -r ~/.shellrc ] && source ~/.shellrc
+
+# Prevent child Bash shells from handing back to Zsh.
+unset FORCE_ZSH
+export SHELL_AUTOEXEC_DONE=true
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -115,20 +122,7 @@ source ~/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# local secrets
-[ -r ~/.shellrc-secrets ] && source ~/.shellrc-secrets
-
-# source common
-[ -r ~/.shellrc ] && source ~/.shellrc
-
-# local overrides
-[ -r ~/.shellrc-local ] && source ~/.shellrc-local
-
 # Visual Studio Code Terminal Shell Integration
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
-
-# Prevent child Bash shells from handing back to Zsh.
-unset FORCE_ZSH
-export SHELL_AUTOEXEC_DONE=true
 
 export AUTOENV_ENABLE_LEAVE=yes
