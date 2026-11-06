@@ -17,7 +17,7 @@
     in    = !git init && git mail
     gh    = !git config user.email '1903092+KarolKozlowski@users.noreply.github.com'
     mail  = !git config user.email 'karol.kozlowski@dotnot.pl' && git config user.name 'Karol Kozlowski' && git signing-on
-    fetch-pr = "!f() { git fetch origin pull/$1/head:pr-$1; }; f"
+    pr    = "!f() { git fetch origin pull/$1/head:pr-$1; }; f"
     sc    = "!f() { git-scanner ${1:-.}; }; f"
     signing-on = !git config user.signingkey B6C2D04B5D1136D1 && git config commit.gpgsign true
     signing-off = !git config --unset user.signingkey && git config commit.gpgsign false
