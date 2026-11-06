@@ -55,40 +55,32 @@ fi
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"
 
 exitstatus() {
-    if [ $? == 0 ]; then
-        echo -ne ""
-    else
-        echo -ne "${rred}"
+    local last_status=$?
+
+    if [ "$last_status" -ne 0 ]; then
+        printf '%b' "$rred"
     fi
 }
 
 sec_env() {
     if [ -n "${SEC_ENV:-}" ]; then
-        local red="${rred:-\[\033[1;31m\]}"
-        echo -ne "${red}(${SEC_ENV})${rst} "
+        printf '%b(%s)%b ' "$rred" "$SEC_ENV" "$rst"
     fi
 }
 
 scm() {
-    info=""
+    local branch
 
-    if [ -d "$(git rev-parse --git-dir 2>/dev/null)" ]; then
-        if git config --local --get remote.origin.url >/dev/null 2>/dev/null; then
-            git_color="${lcyn}"
-            branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-        elif git config --local --get svn-remote.svn.url >/dev/null 2>/dev/null; then
-            git_color="${lpur}"
-            branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-        fi
-    fi
+    branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || {
+        printf ' '
+        return
+    }
 
     if [ -n "$branch" ]; then
-        info=" ${info}[${git_color}${branch}${rst}]${rst}"
+        printf ' [%b%s%b]' "$lcyn" "$branch" "$rst"
     else
-        info=" "
+        printf ' '
     fi
-
-    echo -ne "$info"
 }
 
 PS1="\$(sec_env)${user_color:-${lblu}}\\u${rst}@${host_color:-${rgrn}}${host_alias:-\\h}${rst} \$(exitstatus)\\w${rst}\$(scm)\\$ "
