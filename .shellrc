@@ -1,5 +1,29 @@
 # shell common options (bash, zsh, etc.)
 
+# ANSI colors; \001 and \002 mark nonprinting sequences for Bash Readline.
+rblk="\001\e[0;30m\002" # Black
+rred="\001\e[0;31m\002" # Regular Red
+rgrn="\001\e[0;32m\002" # Regular Green
+rylw="\001\e[0;33m\002" # Regular Yellow
+rblu="\001\e[0;34m\002" # Regular Blue
+rpur="\001\e[0;35m\002" # Regular Purple
+rcyn="\001\e[0;36m\002" # Regular Cyan
+rwht="\001\e[0;37m\002" # Regular White
+gray="\001\e[1;30m\002" # Gray
+lred="\001\e[1;31m\002" # Light Red
+lgrn="\001\e[1;32m\002" # Light Green
+lylw="\001\e[1;33m\002" # Light Yellow
+lblu="\001\e[1;34m\002" # Light Blue
+lpur="\001\e[1;35m\002" # Light Purple
+lcyn="\001\e[1;36m\002" # Light Cyan
+lwht="\001\e[1;37m\002" # Light White
+rst="\001\e[m\002"     # Text Reset
+
+# Default Bash prompt colors and hostname label; local config may override them.
+host_color=${rgrn}
+user_color=${lblu}
+host_alias='\h'
+
 # set default umask
 umask 027
 

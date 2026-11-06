@@ -1,2 +1,7 @@
 # untracked/local, host-specific shell configuration
 export FORCE_ZSH=${FORCE_ZSH:-true}
+
+# Optional Bash prompt overrides (defaults are set in .shellrc):
+# host_color=${rblu}
+# user_color=${lblu}
+# host_alias='\h(local)'
