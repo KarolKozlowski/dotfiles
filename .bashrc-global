@@ -2,10 +2,6 @@
 # .bashrc
 # Karol Kozlowski
 
-#lf='\e[0;10m'   # Line Feed
-#lf=' \n'   # Line Feed
-lf=' '
-
 # local overrides (may set FORCE_ZSH; sourced early so we can exec zsh below
 # without also paying for sourcing .shellrc, since zsh sources it again itself)
 [ -r ~/.shellrc-local ] && source ~/.shellrc-local
@@ -24,23 +20,13 @@ fi
 # Keep the root prompt distinct, even if a local user_color override exists.
 [[ $EUID -eq 0 ]] && user_color=${rred}
 
-export LS_OPTIONS
-
 # Enable bash completion RHEL 6
 [ -e /etc/bash_completion ] && . /etc/bash_completion
 # Enable bash completion RHEL 7
 [ -e /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
-# https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
-[ -e $HOME/.asdf/asdf.sh ] && . $HOME/.asdf/asdf.sh
-[ -e $HOME/.asdf/completions/asdf.bash ] && . $HOME/.asdf/completions/asdf.bash
-
 # Visual Studio Code Terminal Shell Integration
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"
-
-if which direnv > /dev/null 2>&1; then
-  eval "$(direnv hook bash)"
-fi
 
 exitstatus() {
     if [ $? == 0 ]; then

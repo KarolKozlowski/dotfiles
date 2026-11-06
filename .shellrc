@@ -41,6 +41,7 @@ case `uname` in
   ;;
 esac
 
+export LS_OPTIONS
 
 # set proper timezone
 export TZ='Europe/Warsaw'
