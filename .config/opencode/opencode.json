@@ -1,8 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-
   "default_agent": "plan",
-
   "mcp": {
     "searxng-search": {
       "type": "local",
@@ -10,26 +8,31 @@
         "python3",
         "/home/karol.kozlowski/wa/shellpers/searxng-mcp.py"
       ]
+    },
+    "aws-mcp": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "mcp-proxy-for-aws@latest",
+        "https://aws-mcp.us-east-1.api.aws/mcp",
+        "--metadata",
+        "INSTALL_SOURCE=aws-cli"
+      ]
     }
   },
-
   "tools": {
     "searxng-search/*": true
   },
-
   "provider": {
     "edgexpert-vllm": {
       "name": "EdgeXpert GB10 vLLM",
       "npm": "@ai-sdk/openai-compatible",
-
       "options": {
         "baseURL": "http://edgexpert-d43d.np.dotnot.pl:7869/v1"
       },
-
       "models": {
         "qwen3.6-35b-a3b": {
           "name": "Qwen3.6 35B-A3B (EdgeXpert GB10)",
-
           "limit": {
             "context": 65536,
             "output": 8192
@@ -37,19 +40,15 @@
         }
       }
     },
-
     "terra-llama": {
       "name": "Terra RTX 3090 llama.cpp",
       "npm": "@ai-sdk/openai-compatible",
-
       "options": {
         "baseURL": "http://terra.wsl.dotnot.pl:7869/v1"
       },
-
       "models": {
         "qwen3.6-coder": {
           "name": "Qwen3.6-35B-A3B UD Q4_K_M (Terra RTX 3090)",
-
           "limit": {
             "context": 8192,
             "output": 4096
