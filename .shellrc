@@ -33,16 +33,20 @@ umask 027
 export TZ='Europe/Warsaw'
 
 # --- Search paths and directory shortcuts ---
-# Keep these additions ordered: each new directory is prepended to PATH.
-# ~/bin
-PATH=$HOME/bin:$PATH
-# Shell helper scripts
-PATH=$HOME/wa/shellpers:$PATH
-# User-installed commands
-PATH=$HOME/.local/bin:$PATH
-PATH=$HOME/.npm-global/bin:$PATH
-PATH=$HOME/go/bin:$PATH
-PATH=$HOME/.opencode/bin:$PATH
+# Add each path only once, keeping the existing precedence order.
+path_prepend_once() {
+  case ":${PATH-}:" in
+    *":$1:"*) ;;
+    *) PATH="$1${PATH:+:$PATH}" ;;
+  esac
+}
+
+path_prepend_once "$HOME/bin"
+path_prepend_once "$HOME/wa/shellpers"
+path_prepend_once "$HOME/.local/bin"
+path_prepend_once "$HOME/.npm-global/bin"
+path_prepend_once "$HOME/go/bin"
+path_prepend_once "$HOME/.opencode/bin"
 export PATH
 
 # CDPATH lets cd search these locations when given a relative directory name.
@@ -117,7 +121,10 @@ function pr() {
 alias rmb='find -name "*~" -print -delete'
 #alias pip="https_proxy=$proxy; pip --proxy=$http_proxy"
 
-alias pys="echo 'http://'`hostname -f`':8000'; python3 -m http.server 8000"
+pys() {
+  printf 'http://%s:8000\n' "$(hostname -f)"
+  python3 -m http.server 8000
+}
 
 # Authentication and source-control shortcuts.
 alias ldapsearch="ldapsearch -x"
@@ -156,8 +163,12 @@ if [[ -o interactive && -n $TTY ]]; then
 fi
 
 # Preferred editor.
-export EDITOR="$(command -v nvim || command -v vim)"
-alias vim=nvim
+if EDITOR=$(command -v nvim); then
+  alias vim=nvim
+else
+  EDITOR=$(command -v vim)
+fi
+export EDITOR
 
 # Avoid alias conflicts with installed helper commands.
 if { [ -n "${ZSH_VERSION-}" ] && whence -p dtop >/dev/null; } ||
