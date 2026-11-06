@@ -79,9 +79,17 @@ in_busybox()  { in_container busybox:latest "$@"; }
 in_ubuntu()   { in_container ubuntu:24.04 "$@"; }
 
 # Aliases for commonly used cmds
+if [ -x /usr/bin/dircolors ]; then
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
+
 alias ls="ls $LS_OPTIONS"
 alias ll="ls $LS_OPTIONS -l"
 alias l="ls $LS_OPTIONS -lA"
+alias la='ls -A'
 function pr() {
   if [ -z "${proxy}" ]; then
     echo "WARN: \$proxy is not set" >&2
@@ -151,6 +159,7 @@ export CDPATH
 
 # less config
 export LESS="--quit-if-one-screen --quit-at-eof --RAW-CONTROL-CHARS --no-init"
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # tell gpg where to ask for pass
 if [[ -o interactive && -n $TTY ]]; then
