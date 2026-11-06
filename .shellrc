@@ -1,9 +1,10 @@
 # shell common options (bash, zsh, etc.)
 
-# Host secrets are shared by Bash and Zsh.
+# --- Secrets and prompt defaults ---
+# Secrets shared by Bash and Zsh.
 [ -r ~/.shellrc-secrets ] && source ~/.shellrc-secrets
 
-# ANSI colors; \001 and \002 mark nonprinting sequences for Bash Readline.
+# Prompt colors. The markers identify nonprinting ANSI sequences to Bash Readline.
 rblk="\001\e[0;30m\002" # Black
 rred="\001\e[0;31m\002" # Regular Red
 rgrn="\001\e[0;32m\002" # Regular Green
@@ -20,32 +21,39 @@ lblu="\001\e[1;34m\002" # Light Blue
 lpur="\001\e[1;35m\002" # Light Purple
 lcyn="\001\e[1;36m\002" # Light Cyan
 lwht="\001\e[1;37m\002" # Light White
-rst="\001\e[m\002"     # Text Reset
+rst="\001\e[m\002"      # Text Reset
 
-# Default Bash prompt colors and hostname label; local config may override them.
+# Shared prompt defaults; host-specific settings can override these at the end.
 host_color=${rgrn}
 user_color=${lblu}
 host_alias='\h'
 
-# set default umask
+# --- Shell and platform defaults ---
 umask 027
-
-case `uname` in
-  'Linux')
-    LS_OPTIONS="--color"
-  ;;
-  'SunOS')
-  ;;
-  *)
-  echo 'What am I?'
-  ;;
-esac
-
-export LS_OPTIONS
-
-# set proper timezone
 export TZ='Europe/Warsaw'
 
+# --- Search paths and directory shortcuts ---
+# Keep these additions ordered: each new directory is prepended to PATH.
+# ~/bin
+PATH=$HOME/bin:$PATH
+# Shell helper scripts
+PATH=$HOME/wa/shellpers:$PATH
+# User-installed commands
+PATH=$HOME/.local/bin:$PATH
+PATH=$HOME/.npm-global/bin:$PATH
+PATH=$HOME/go/bin:$PATH
+PATH=$HOME/.opencode/bin:$PATH
+export PATH
+
+# CDPATH lets cd search these locations when given a relative directory name.
+CDPATH=.
+CDPATH=$CDPATH:$HOME
+CDPATH=$CDPATH:$HOME/wa
+CDPATH=$CDPATH:$HOME/wa/ansible
+[ -d /mnt/c/Users/karol ] && CDPATH=${CDPATH}:/mnt/c/Users/karol
+export CDPATH
+
+# --- Container helpers ---
 # Pick engine: prefer podman, fallback to docker
 _container_engine() {
   if command -v podman >/dev/null 2>&1; then
@@ -78,18 +86,25 @@ in_alpine()   { in_container alpine:latest "$@"; }
 in_busybox()  { in_container busybox:latest "$@"; }
 in_ubuntu()   { in_container ubuntu:24.04 "$@"; }
 
-# Aliases for commonly used cmds
+# --- Command aliases and helpers ---
+unset GREP_OPTIONS
 if [ -x /usr/bin/dircolors ]; then
+  LS_OPTIONS="--color"
+  GREP_OPTIONS="--color=auto"
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
 fi
 
+export LS_OPTIONS
+
+alias grep="grep $GREP_OPTIONS"
+alias fgrep="fgrep $GREP_OPTIONS"
+alias egrep="egrep $GREP_OPTIONS"
 alias ls="ls $LS_OPTIONS"
 alias ll="ls $LS_OPTIONS -l"
 alias l="ls $LS_OPTIONS -lA"
 alias la='ls -A'
+
+# Run commands through the configured proxy.
 function pr() {
   if [ -z "${proxy}" ]; then
     echo "WARN: \$proxy is not set" >&2
@@ -97,18 +112,18 @@ function pr() {
   fi
   http_proxy="$proxy" https_proxy="$proxy" "$@"
 }
+
+# File cleanup and local web server shortcuts.
 alias rmb='find -name "*~" -print -delete'
 #alias pip="https_proxy=$proxy; pip --proxy=$http_proxy"
 
 alias pys="echo 'http://'`hostname -f`':8000'; python3 -m http.server 8000"
 
-# force simple authentication
+# Authentication and source-control shortcuts.
 alias ldapsearch="ldapsearch -x"
-
-# alias for getting ssh keys from GitHub
 alias ssh-key-github='curl https://github.com/KarolKozlowski.keys'
 
-# pwgen shortcut
+# Generate random passwords.
 #alias pwg='pwgen -sny1 20'
 function pw() {
   LC_ALL=C tr -dc '[:alnum:]' </dev/urandom | head -c ${1:-32}; echo
@@ -117,70 +132,47 @@ function pwg() {
   LC_ALL=C tr -dc '[:graph:]' </dev/urandom | head -c ${1:-20}; echo
 }
 
-# preserve working dir across ssh sessions
+# --- SSH integration ---
+# Preserve the working directory across SSH sessions.
 alias ssh='env SSH_PWD="$PWD" /bin/ssh'
 if [ -n "$SSH_PWD" ]; then
    cd "$SSH_PWD"
    unset SSH_PWD
 fi
 
-# setup ssh agent bridge
+# Connect to the host SSH agent when the bridge is available.
 [ -e ~/wa/shellpers/agent-bridge.sh ] && source ~/wa/shellpers/agent-bridge.sh
 
-# setup ussers hosts file for tab-completion
+# Optional host list used by SSH completion.
 [ -e ~/.ssh/hosts ] && export HOSTFILE=~/.ssh/hosts
 
-# ~/bin
-PATH=$HOME/bin:$PATH
-# shelpers
-PATH=$HOME/wa/shellpers:$PATH
-# local bin
-PATH=$HOME/.local/bin:$PATH
-# npm
-PATH=$HOME/.npm-global/bin:$PATH
-# go path
-PATH=$HOME/go/bin:$PATH
-# Add current dir to PATH
-# PATH=.:$PATH
-# include python site-packages in PATH
-#[ -n "${PYTHONPATH}" ] && PATH=${PYTHONPATH}:$PATH
-# opencode
-export PATH=$HOME/.opencode/bin:$PATH
-
-# CDPATH
-CDPATH=.
-CDPATH=$CDPATH:$HOME
-CDPATH=$CDPATH:$HOME/wa
-CDPATH=$CDPATH:$HOME/wa/ansible
-[ -d /var/lib/jenkins ] && CDPATH=$CDPATH:/var/lib/jenkins
-[ -d /mnt/c/Users/karol ] && CDPATH=${CDPATH}:/mnt/c/Users/karol
-
-export CDPATH
-
-# less config
+# --- Terminal settings ---
 export LESS="--quit-if-one-screen --quit-at-eof --RAW-CONTROL-CHARS --no-init"
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# tell gpg where to ask for pass
+# Tell GPG which terminal to use for prompts.
 if [[ -o interactive && -n $TTY ]]; then
   export GPG_TTY="$TTY"
 fi
 
-# the one and only
+# Preferred editor.
 export EDITOR="$(command -v nvim || command -v vim)"
 alias vim=nvim
 
-# check for dtop binary and unalias dtop if present
+# Avoid alias conflicts with installed helper commands.
 if { [ -n "${ZSH_VERSION-}" ] && whence -p dtop >/dev/null; } ||
    { [ -z "${ZSH_VERSION-}" ] && type -P dtop >/dev/null; }; then
   unalias dtop 2>/dev/null
 fi
 
+# --- Directory helper ---
+# Create a directory and enter it.
 unalias md 2>/dev/null
 function md() {
     mkdir -p "${1}"
     cd "${1}"
 }
 
-# Host-specific overrides are applied after shared defaults.
+# --- Host-specific overrides ---
+# Loaded last so host settings can replace shared defaults.
 [ -r ~/.shellrc-local ] && source ~/.shellrc-local
