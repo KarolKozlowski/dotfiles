@@ -108,6 +108,11 @@ alias ll="ls $LS_OPTIONS -l"
 alias l="ls $LS_OPTIONS -lA"
 alias la='ls -A'
 
+# Confirm before removing files or overwriting destinations.
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
 # Run commands through the configured proxy.
 function pr() {
   if [ -z "${proxy}" ]; then
