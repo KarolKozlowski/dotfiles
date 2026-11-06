@@ -1,6 +1,4 @@
 #!/bin/bash
-# .bashrc
-# Karol Kozlowski
 
 # If not running interactively, don't do anything.
 case $- in
@@ -12,6 +10,8 @@ esac
 # interactive Bash configuration first.
 [ -r ~/.shellrc-local ] && source ~/.shellrc-local
 
+# Replace Bash with Zsh only in an interactive terminal, when enabled and
+# available; the exported marker prevents child shells from handing off again.
 if [ "${SHELL_AUTOEXEC_DONE:-}" != true ] &&
    [ "${FORCE_ZSH:-false}" = true ] &&
    test -t 1 && command -v zsh > /dev/null; then
@@ -19,23 +19,21 @@ if [ "${SHELL_AUTOEXEC_DONE:-}" != true ] &&
     exec zsh
 fi
 
-# History
+# Ignore commands starting with a space and consecutive duplicate entries.
 HISTCONTROL=ignoreboth
+# Append history on exit instead of overwriting the history file.
 shopt -s histappend
+# Maximum commands retained in the current shell's history list.
 HISTSIZE=1000
+# Maximum lines retained in the history file.
 HISTFILESIZE=2000
+
+# Refresh LINES and COLUMNS after commands when the terminal is resized.
 shopt -s checkwinsize
 
 # Include the chroot name in the prompt when present.
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# alert uses Bash history formatting, so it remains Bash-specific.
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
 fi
 
 # Load Bash completion if the system startup files have not already done so.
